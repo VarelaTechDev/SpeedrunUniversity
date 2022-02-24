@@ -1,32 +1,35 @@
+// > Essentials 
 const express = require("express")
-const db = require('./database')
-
 const cors = require('cors')
 const dotenv = require('dotenv').config()
-
 const cookieParser = require('cookie-parser')
-
 const morgan = require('morgan')
+const PORT = process.env.PORT
 
+// ? Connect to our SQL server
+const db = require('./database/database')
+
+// ? Allow us to CALL express instances
 const app = express()
 
-const port = process.env.PORT
-
+// ^ Allow us to send data to our server/website
 app.use(express.json())
 app.use(express.urlencoded({extended: true,}))
 
+// ^ Displays info to the console when we contact the server
 app.use(morgan('tiny'))
 
+// ^ A whitelist to what links are allowed or not allowed to send data
 app.use(cors({
-  origin: ['http://localhost:5000'],
+  origin: ['http://localhost:5000'], // ? We will need to put the [netlify] link here
   credentials: true,
   exposedHeaders: ['speed_cookie']
 }))
 
+app.listen(PORT, () => console.log(`Server started on ${PORT}`))
 
-app.get("/", (req, res) => {
-  res.json({ message: "ok" });
-})
+// ^ How the user will signin/logout/register for an account
+app.use('/auth', require('./router/user'))
 
 app.get('/users', async (req, res) => {
   const results = await db.promise().query(`SELECT * FROM STUDENT`)
@@ -49,8 +52,4 @@ app.post('/users', (req, res) => {
 
   }
   
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
 })
