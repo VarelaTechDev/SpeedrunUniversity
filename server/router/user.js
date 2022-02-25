@@ -20,6 +20,8 @@ router.get('/', async(req, res) => {
     }
 })
 
+
+// ^ Someone wants to register an account
 router.post('/register', async(req, res) => {
     try{
         // * Destructure it for easier access
@@ -95,6 +97,68 @@ router.post('/register', async(req, res) => {
         res.status(500).send
     }
 })
+
+// ^ A user wants to login
+router.post('/login', async(req, res) => {
+    try{
+        
+        const {username, password} = req.body
+
+        if(!username || !password){
+            return res.status(400).json({
+                errorMessage: 'Please enter all required fields'
+            })
+        }
+
+        // ? Check the database to see if a user exist        
+        const existingUser = await db.promise().query(`SELECT * FROM STUDENT WHERE username = '${username}'`) 
+        
+        // ? If the user DOES NOT exist, we end the logic here
+        if(!existingUser[0][0]){
+            return res.status(401)({
+                // * We don't want to tell the 'hacker' what they got wrong
+                errorMessage: 'Wrong email or password'
+            })
+        }
+
+        // ? Time to check the password and see if encrpyting it is the same as the database
+        const isCorrectPassword = await bycrypt.compare(password, existingUser[0][0].password)
+
+        if(!isCorrectPassword){
+            return res.status(401).json({
+                errorMessage: 'Wrong email or password'
+            })
+        }
+        // ? Create a token for the user
+        const token = jwt.sign(
+            {
+                id: existingUser[0][0].id
+                //id: await db.promise().query(`SELECT id FROM STUDENT WHERE username= '${username}'`)
+            },
+            process.env.JWT_SECRET
+        )
+
+        res.cookie(
+            'speedrun_cookie',
+            token, // ? WHERE WE ARE GETTING THE DATA
+            {
+                httpOnly: true,
+                sameSite:
+                    process.env.NODE_ENV === 'development' ? 'lax' 
+                        : 
+                    process.env.NODE_ENV === 'production' && 'none',
+                secure: 
+                    process.env.NODE_ENV === 'development' ? false 
+                        :
+                    process.env.NODE_ENV === 'production' && true
+            }
+        ).send()
+    }catch(err){
+        res.status(500).send()
+    }
+})
+
+// TODO ADD AN AUTH TO VERIFY THIS IS THE CORRECT USER AND NOT ANYONE CAN LOG ANYONE OUT
 
 
 module.exports = router
