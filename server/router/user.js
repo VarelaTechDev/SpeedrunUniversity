@@ -44,22 +44,51 @@ router.post('/register', async(req, res) => {
             })
         }
 
+        // ? Don't forget to add quotes to SQL queries!!! 
+        const existingUsername = await db.promise().query(`SELECT * FROM STUDENT WHERE username = '${username}'`) 
 
-        const existingUsername = await db.promise().query(`SELECT * FROM STUDENT WHERE username = ${username}`)
-        if(existingUsername){
+        if(existingUsername[0][0]){
             return res.status(400).json({
-                errorMessage: ''
+                errorMessage: 'An account with this username exist already'
             })    
         }
+
+        // * Needed to not STORE passwords in the database
+        const salt = await bycrypt.genSaltSync(10)
+
+        // * Hash the password using bycrypt
+        const passwordHash = await bycrypt.hashSync(password, salt)
+
+        console.log('BEFORE USER')
+        // * Add the user to the database
+        // const user = 
+
+        await db.promise().query(`INSERT INTO STUDENT(name, username, password) VALUES('${name}', '${username}', '${passwordHash}')`)
+    
         
-        // const results = await db.promise().query(`SELECT * FROM STUDENT`)
-        // res.status(200).send(results[0])
-        // db.promise().query(`INSERT INTO STUDENT VALUES('${StudentID}', '${StudentName}')`)
-        // res.status(201).send({
-        //     msg: 'Added Student'
-        // })
+        // ? Now, let's give the user a cookie to save their session
+        const token = jwt.sign({
+            id: await db.promise().query(`SELECT id FROM STUDENT WHERE username= '${username}'`)
+        },
+        process.env.JWT_SECRET
+        )
 
+        res.cookie(
+            'speedrun_cookie', // ? Name of the cookie we are giving it
+            token, // ? Where the data will come from
+            {
+                httpOnly: true,
+                sameSite:
+                    process.env.NODE_ENV == 'development' ? 'lax'
+                        :
+                    process.env.NODE_ENV == 'production' && 'none',
+                secure:
+                    process.env.NODE_ENV == 'development' ? false
+                        :
+                    process.env.NODE_ENV == 'production' && true
 
+            }
+        ).send()
 
     }catch{
         // ? Error 500 means server error
