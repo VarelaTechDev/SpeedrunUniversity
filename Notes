@@ -1,0 +1,233 @@
+Use percentages for widths NOT FIXED PIXELS
+
+Use em for fonts
+
+rem: root
+em: as is <--- Problem when we nest things
+
+Process not defined error?
+
+Update this to 5.0.0 to resolve the issue
+npm install react-scripts@latest
+
+
+CSS position
+A parent is needed >> p
+A child follows under it >> c
+
+Static: 
+    follow the flow of other elements --> 1,2,3,4 You expect the element to go with that order
+
+Relative: 
+    Nearly the same as static
+    Can change the top/left/right/bottom
+    left: 10px <-- Left side is 10px away from the left
+    Overflows!
+    Won't push around static elements
+
+    ? Now we have to move all of this down, so position relative isn't really used for top/left/right/bottom
+    USEFUL to set an element relative as a parent for absolute
+
+Relative <--> Absolute work together well
+
+Absolute: Place posistion: absolute in child-one
+    A ghost block?
+    The other child IGNORE this
+    Treat it like it doesn't even exist
+    Good for when you want to stick something to it 
+    top? ABSOLUTE POSITION OF THE PARENT CONTAINER
+    The parent? Nope, it's static --> Need a position : realtive, aboslute, stiicky, fixed
+    Now we have realtive a use case
+
+Fixed: Nearly the same as absolute
+    Ignores the parent element -- Even if they have a relative posisition
+
+    FIXED to the entire HTML page
+    Stays at the same place when we scroll
+
+Sticky: Combination of relative/fixed into one
+    A mini dynamic fixed position
+    It's relative by default and becomes fixed when we scroll down
+
+
+
+==========================================================================================
+How to Deploy
+=========================================================================================
+Heroku:: 
+
+Create new app
+Put a name and now Heroku Git
+
+sudo snap install --classic heroku
+
+$ heroku login
+
+
+Paste this in the VSCode Terminal
+heroku git:remote -a snippet-managerserver
+[Push to this remote to run it]
+git push heroku master
+
+Create a new Git repository
+
+Initialize a git repository in a new or existing directory
+
+$ cd my-project/
+$ git init
+$ heroku git:remote -a snippet-managerserver
+
+Deploy your application
+
+Commit your code to the repository and deploy it to Heroku using Git.
+
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku master
+
+Just create a new repo and follow the directions...
+Go to more and view logs
+Now we have .env errors...
+
+Go to settings to set .env variables
+
+Go to settings and click Config Vars and click More --> Now click reset all dynos
+add 
+const PORT = process.env.PORT || 5000
+Heroku will have the port for us
+
+Now our app is now running online now
+
+FRONTEND:: NOW WE TRY TO UPLOAD THE FRONTEND TO Netlify
+
+Don't want to just drop the Client file
+We create a build folder :: npm run build
+
+Site settings to change the name at least
+
+Production environment and development environment
+process.env.NODE_ENV
+
+IN src/create util folder and create domain.js
+export default process.env.NODE_ENV === "development" ? "http://localhost:5000" : process.env.NODE_ENV === "production" && "https://[website]].herokuapp.com"
+
+By default it's already in development mode
+
+
+Go to Netlify and to Build & Deploy
+
+Go to Environment
+NODE_ENV --> production
+
+Rebuild it and upload it
+
+Blocked from CORS...
+In index.js
+origin has only localhost:3000
+
+
+Now we need to set more security settings for cookies
+Didn't see the problem with the cookie
+Seems fine on FireFox, but not with Chrome
+
+Go to userRouter.js for our cookie settings
+By default it is lax
+
+sameSite: 'none' ADD SECURE: true
+
+Security RISK!!!
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'none',
+            secure: true
+        }).send()
+Only allows https 
+
+HTTPS encrypts it if someone reads it
+https, means it will not work locally....
+
+Now go to Heroku and do NODE_ENV = production
+
+When ever we make changes to the server
+git commit -am "ASASASASAS"
+git push heroku master
+
+
+For frontend/client
+npm run build
+Upload to Deploys the build folder
+
+Mini CSS ERROR??? 2.5 breaks things
+npm i -D --save-exact mini-css-extract-plugin@2.4.5
+
+Now clear the cookie
+
+We have the same database with development and production :: Care
+
+=================================================================================
+SASS #15 Media Queries
+=================================================================================
+We want to have it adopt depending on what screen size we have
+
+Create a map of different breakpoints
+$breakpoints:(
+    'xs': 0,
+    'sm': 480px,
+    "md": 720px,
+    "lg": 960px
+)
+
+@mixin xs {
+    @media(min-width: map-get($breakpoints, 'xs')){
+        @content; // If we use this Mixin elsewhere <-- Dont want to recode it>
+    }
+}
+
+
+How to use it??
+@xs {
+    font-size: 10px; // <-- Place what ever properties we want>
+    background-color: red;
+}
+
+
+Import the breakpoints --> @import 'breakpoint'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

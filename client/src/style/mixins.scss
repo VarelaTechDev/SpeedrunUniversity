@@ -1,0 +1,47 @@
+// > We cam easily import this
+
+
+@mixin btn(){
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+
+    &:hover{
+        box-shadow: var(--box-shadow);
+    }
+}
+
+@mixin link(){
+    color: var(--text-link-color);
+    font-weight: bold;
+
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+@mixin sidebar-btn(){
+    
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    border: 1px gray solid;
+    padding: 0.6em;
+    margin: 0.2em;
+    span{
+        color: black;
+    }
+    &:hover{
+        box-shadow: var(--box-shadow);
+        
+        background-color: #1d9bf0;
+        span{
+            color:white;
+        }
+    }
+}
+
+@mixin card(){
+    padding: 1rem;
+    border-radius: 10px;
+    background: var(--light-color);
+    box-shadow: var(--box-shadow);
+}

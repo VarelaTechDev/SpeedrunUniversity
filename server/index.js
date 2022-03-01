@@ -1,55 +1,45 @@
-// > Essentials 
-const express = require("express")
+const express = require('express')
+const mongoose = require('mongoose')
+// ? Access to send data to our server with only our weblinks
 const cors = require('cors')
+// ? Allows us access to .env files to protect us when we use secret keys
 const dotenv = require('dotenv').config()
+// ? Gives us a cookie that we can use after we validate the user and keep them logged in
 const cookieParser = require('cookie-parser')
+
 const morgan = require('morgan')
-const PORT = process.env.PORT
 
-// ? Connect to our SQL server
-const db = require('./database/database')
-
-// ? Allow us to CALL express instances
 const app = express()
 
-// ^ Allow us to send data to our server/website
+
+// * JSON Middleware + Allow you to POST
 app.use(express.json())
-app.use(express.urlencoded({extended: true,}))
-
-// ^ Displays info to the console when we contact the server
-app.use(morgan('tiny'))
-
-// ^ A whitelist to what links are allowed or not allowed to send data
+// * A mini-whitelist to what links are and are not allowed to send data
 app.use(cors({
-  origin: ['http://localhost:5000'], // ? We will need to put the [netlify] link here
-  credentials: true,
-  exposedHeaders: ['speed_cookie']
+    origin:['http://localhost:3000', 'https://barbter.netlify.app'],
+    credentials: true,
+    exposedHeaders: ['barbter_cookie']
 }))
 
+app.use(morgan('tiny'))
+
+// * Convert cookie strings strings into objects
+app.use(cookieParser())
+
+const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server started on ${PORT}`))
 
-// ^ How the user will signin/logout/register for an account
-app.use('/auth', require('./router/user'))
+// * Middleware for sending Tweets
+app.use('/tweet', require('./router/tweetRouter'))
 
-app.get('/users', async (req, res) => {
-  const results = await db.promise().query(`SELECT * FROM STUDENT`)
-  res.status(200).send(results[0])
-})
+// * Middleware for logging in
+app.use('/auth', require('./router/userRouter'))
 
-app.post('/users', (req, res) => {
-  const {StudentID, StudentName} = req.body
-  
-  // Check to see if both are 'truthy'
-  if(StudentID && StudentName){
-    try{
-      db.promise().query(`INSERT INTO STUDENT VALUES('${StudentID}', '${StudentName}')`)
-      res.status(201).send({
-        msg: 'Added Student'
-      })
-    }catch(err){
-      console.log(err)
-    }
-
-  }
-  
-})
+// * MongoDB [Local Version for speed]
+// mongoose.connect(`mongodb+srv://rosenthal:${process.env.MONGO_PASSWORD}@arisadatabase.wez6h.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, 
+mongoose.connect(`mongodb://localhost:27017/barbter`, 
+    (err) => {
+        if(err) 
+            return console.log(err)
+        console.log('Connected to MongoDB')
+    })

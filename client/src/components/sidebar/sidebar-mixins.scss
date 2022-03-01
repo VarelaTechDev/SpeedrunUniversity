@@ -1,0 +1,18 @@
+@mixin setDisplay(){
+    position: absolute;
+    
+    top: 0; // As you can guess this is how high it will be :: 0 is the top
+    bottom: 0; // Doesn't really show a difference
+    left: 18.5%; // How far left we want this to appear
+    right: 0;
+    overflow: auto;
+    height: 100vh;
+    // width: 100vw;
+    // width: 80%;
+    // height: 100vw;
+    // overflow: scroll;
+    // overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+    background: var(--primary-color);
+    margin-left: 1rem;
+    // margin-top: 1rem;
+}

@@ -1,0 +1,75 @@
+@import '../../style/mixins.scss';
+@import '../../style/breakpoints.scss';
+
+
+.auth-form{
+    position: absolute;
+    
+    top: 0; // As you can guess this is how high it will be :: 0 is the top
+    bottom: 0; // Doesn't really show a difference
+    // @include sm(){
+    //     left: 15.5%;
+    // }
+    // @include md(){
+    //     left: 18.5%; // How far left we want this to appear    
+    // }
+    // @include lg(){
+        
+    // }
+    @include sm(){
+        left: 12%;
+    }
+
+    @include md(){
+        left: 15%;
+    }
+
+    @include lg(){
+        left: 17%;
+    }
+    
+
+    // width: 100vw;
+    width: 80%;
+    
+    // overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+    margin-left: 1rem;
+    margin-top: 1rem;
+    
+    .form-regLog{
+        display: flex;
+        flex-direction: column;
+        
+        height: 34%;
+        .line-up{
+            margin-top: 0.5em;
+        }
+        .line-up:first-of-type{
+            margin-top: 0;
+        }
+        input{
+            margin: 0.5em 0 0 0;
+            border: 1px gray solid;
+            width: 100%;
+        }
+    }
+
+    
+
+    h2{
+        margin-bottom: 1rem;
+        font-size: 1.75rem;
+    }
+    .btn-submit{
+        @include btn();
+        border: 1px solid black;
+        margin-bottom: 1rem;
+        background-color: rgb(73, 105, 209);
+        color: white;
+        margin: 1em 2em 0 2em;
+    }
+    p{
+        margin-top: 1em;
+    }
+
+}

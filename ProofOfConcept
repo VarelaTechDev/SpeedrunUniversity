@@ -1,0 +1,49 @@
+// Use this to create our Tweet
+  const [post, setPost] = useState({
+    id: new Date().getTime().toString(),
+    username: '',
+    img: '',
+    msg: '',
+    likes: 0
+  })
+
+
+  
+
+  // ? Use View to store our tweets from CRUD or Grocery project List/ks
+  // > Goal: Pass data from data.js into our localStorage
+  // ? Grab data -> Turn it into an object/json?? and pass it so we can use the same method
+  // This will load in the data into our localStorage
+  useEffect(() => {
+    
+    // console.log(data.length) This gives us the length of our data
+    // ? We can make a for loop to iterate through this and run it through our tweet button!
+    setPost({
+      id: data[0].id,
+      username: data[0].username,
+      img:'g',
+      msg:'Hello',
+      likes:2
+    });
+
+    console.log(post)
+    console.log(data[0].username)
+    
+
+
+  }, [])
+
+
+  const handleSubmit = (e) => {
+    const newTweet = {
+      id: '20', 
+      username: 'Barbara2',
+      img: '/Images/lumine.png',
+      msg: 'How do I cook?',
+      likes: 0
+    }
+    
+  }
+
+
+  // Idea one, render each tweet and add to it

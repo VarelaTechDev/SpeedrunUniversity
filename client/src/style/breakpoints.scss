@@ -1,0 +1,61 @@
+// * window.innerWidth
+// ? xs: 0 - 479
+// ? sm: 480 - 719
+// ? md: 720 - 959
+// ? lg: 960 - 1199
+// ? xl: 1200 - inf
+
+// * Size of middle monitor is 2560 B)
+// * Size that a Window can be is 450 or xs
+// * The size of your workstation monitor is 1078 or lg
+
+// ? We will group 'lg' and 'xl' together [960 - INF]
+// ? We will group xs and sm together [0-719]
+
+// ? We will say 
+// We will say @include xs() --> 0 - 719
+
+// ? medium [720 - 959px] will need a smaller font and smaller text
+// When we say @include md() --> 720 -- 959
+
+// ? large [960 - INF] What we currently have at the moment
+// Will need to code lg into the code to place them?
+
+$breakpoints:(
+    'xs': 0,
+    'sm': 480px,
+    'md': 720px,
+    'lg': 960px,
+    'xl': 1200px,
+);
+
+
+// 0 px- 719 px
+@mixin sm{
+    @media (min-width: map-get($breakpoints, 'xs')) and (max-width: map-get($breakpoints, 'md')){
+        @content;
+    }
+}
+
+// 720 px - 959 px
+@mixin md{
+    @media (min-width: map-get($breakpoints, 'md')) and (max-width: map-get($breakpoints, 'lg')){
+        @content;
+    }
+}
+
+// 960px or higher
+@mixin lg{
+    @media (min-width: map-get($breakpoints, 'lg')){
+        @content;
+    }
+}
+
+
+// We want a really specific one that isn't covered by this
+// Default value of 0
+@mixin breakpoint($bp: 0) {
+    @media(min-width: $bp){
+        @content;
+    }
+} 

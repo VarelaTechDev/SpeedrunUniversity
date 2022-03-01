@@ -1,0 +1,13 @@
+.loading{
+    position: relative;
+
+    font-size: 7rem;
+    margin-top: 2rem;
+    text-align: center;
+    // ? variables are in the root, so we have access to it anywhere we go
+    color: var(--light-color);
+
+    // * Global variables??? 
+    // ? We call variables.scss > > Which is in index.scss > > which is in index.scss that's in App.js(parent) > The only thing higher
+    // ? is index.js
+}

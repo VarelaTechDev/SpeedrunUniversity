@@ -1,0 +1,45 @@
+@import '../../style/breakpoints.scss';
+@import '../../style/mixins.scss';
+
+// This is the other side of our Sidebar...holds the tweet and tweetbox
+.web-area{
+    position: absolute;
+    top: 0; 
+    right: 0;
+    @include sm(){
+        left: 9%; 
+    }
+    @include md(){
+        left: 14%; 
+    }
+    @include lg(){
+        left: 17%; 
+    }
+    
+    bottom: 0;
+    height: 100vh;
+    
+    
+
+    // * Display this if no tweets are present :: otherwise we will display tweets
+    .no-tweets-msg{
+        margin-top: 6rem;
+        color: var(--text-light-color);
+        text-align: center;
+        h2 {
+            font-size: 3rem;
+        }
+        
+        a{
+            @include btn();
+            margin-top: 2rem;
+            color: var(--text-dark-color);
+            background: var(--light-color);
+            display: inline-block;
+
+            &:hover{
+                text-decoration: unset;
+            }
+        }
+    }
+}
