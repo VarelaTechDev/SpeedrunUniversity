@@ -83,7 +83,7 @@ router.post('/register', async(req, res) => {
 
             // * A cookie that utilizes the token to allow a user to stay logged in
             res.cookie(
-                'barbter_cookie', // ? Name of the cookie we are giving it
+                'speedrun_cookie', // ? Name of the cookie we are giving it
                 token, // ? Where the data from the token will come from
                 {
                     httpOnly: true,
@@ -122,7 +122,7 @@ router.post('/register', async(req, res) => {
 
         // * A cookie that utilizes the token to allow a user to stay logged in
         res.cookie(
-            'barbter_cookie', // ? Name of the cookie we are giving it
+            'speedrun_cookie', // ? Name of the cookie we are giving it
             token, // ? Where the data from the token will come from
             {
                 httpOnly: true,
@@ -207,7 +207,7 @@ router.post('/login', async (req, res) => {
                 errorMessage: 'Wrong email or password'
             })
         }
-
+        
         // * Create a token for the user
         const token = jwt.sign(
             {
@@ -216,8 +216,10 @@ router.post('/login', async (req, res) => {
             process.env.JWT_SECRET // * Make sure we are using a token from our server!
         )
 
+        console.log('ERROR')
+
         res.cookie(
-            'barbter_cookie', 
+            'speedrun_cookie', 
             token, 
             {
                 httpOnly: true,
@@ -235,12 +237,12 @@ router.post('/login', async (req, res) => {
     }
 })
 
-// ^ GET request :: Delete the cookie 'barbter_cookie from localHost
+// ^ GET request :: Delete the cookie 'speedrun_cookie from localHost
 // ? You need to be logged in to logout
 router.get('/logout', auth, async(req, res) => {
     try{
         res.cookie(
-            'barbter_cookie', 
+            'speedrun_cookie', 
             '', 
             {
                 httpOnly: true,
@@ -260,10 +262,10 @@ router.get('/logout', auth, async(req, res) => {
 })
 
 // ^ GET request :: Just like the auth middleware, but now axios can call it
-// ? Not sure what other way to see if a user has the barbter_cookie without entering credentials
+// ? Not sure what other way to see if a user has the speedrun_cookie without entering credentials
 router.get('/loggedIn', async(req, res) => {
     try{
-        const token = req.cookies.barbter_cookie
+        const token = req.cookies.speedrun_cookie
 
         // * Does the cookie even exist?
         if(!token){

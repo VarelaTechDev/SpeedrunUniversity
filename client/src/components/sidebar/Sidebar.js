@@ -13,6 +13,9 @@ import './Sidebar.scss'
 import {BsTwitter, BsBell, BsEnvelopeOpen, BsPersonFill, BsPerson} from 'react-icons/bs'
 import {FaHome} from 'react-icons/fa'
 import {HiOutlineHashtag} from 'react-icons/hi'
+import {GiBlackBook} from 'react-icons/gi'
+
+import BBIcon from '../../images/BB_Icon.png'
 
 function Sidebar(){
     const navigate = useNavigate()    
@@ -30,6 +33,7 @@ function Sidebar(){
             <div className='sidebar-interactive'>
                 
                 <section className='icons'>
+                    {/* You can click on the home button to go back to --> '/' */}
                     <div className="home-btn">
                         <Link to='/' className='home-link' style={{
                             display: 'flex',
@@ -41,6 +45,8 @@ function Sidebar(){
                         </Link> 
                     </div>
 
+                    {/* The user wants to click on the profile button but if */}
+                    {/* They are not logged in, redirect them to register */}
                     <div className="profile-btn">
                         {user === null || user.username === null ? 
                             (
@@ -54,6 +60,7 @@ function Sidebar(){
                             </Link>
                             )
                             : 
+                            // ? User is not null nor is user.username is null, meaning it will show them their profile
                             (
                                 <Link to={`/profile/${user.username}`} className='profile-link'
                                 style={{
@@ -63,6 +70,32 @@ function Sidebar(){
                                 }}>
                                     <BsPerson  className='icon'/><span>Profile</span></Link>   
                         )}
+                    </div>
+
+                    <div className='blackboard-btn'>
+                        {user === null || user.username === null ?
+                        (
+                            <Link to='register' className='profile-link'
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    color: 'gray'
+                                }}>
+                                <GiBlackBook className='icon'/><span>Blackboard</span>
+                            </Link>
+                        ):(
+
+                            <Link to='/blackboard' className='bb-link'
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    color: 'gray'
+                                }}>
+                            <GiBlackBook className='icon'/><span>Blackboard</span>
+                        </Link>
+
+                        )}
+                        
                     </div>
     
                 </section>

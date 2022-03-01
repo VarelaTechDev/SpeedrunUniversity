@@ -9,6 +9,8 @@ import Login from './components/auth/Login'
 
 import Profile from "./components/sidebar/Profile";
 
+import Blackboard from "./components/blackboard/Blackboard";
+
 function RouterPage() {
     return  (
         <BrowserRouter>
@@ -31,6 +33,9 @@ function RouterPage() {
                     <Register/>
                 }/>
 
+                <Route path='blackboard' element={
+                    <Blackboard/>
+                }/>
             </Routes>
 
             {/* <Routes className='mainside-links'>

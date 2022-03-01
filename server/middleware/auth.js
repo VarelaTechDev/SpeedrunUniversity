@@ -1,10 +1,10 @@
-// > Checks to see if a person has 'barbter_cookie' in their req.cookies
+// > Checks to see if a person has 'speedrun_cookie' in their req.cookies
 const jwt = require('jsonwebtoken')
 
 function auth(req, res, next){
     try{
         // * A user should have a cookie in their req
-        const token = req.cookies.barbter_cookie
+        const token = req.cookies.speedrun_cookie
         
         // * A user doesn't have a cookie in their browser
         if(!token) {

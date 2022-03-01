@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom'
 import Tweet from '../tweetComponent/Tweet'
 import TweetBox from '../tweetComponent/TweetBox'
 
+import Header from './Header'
+
 import UserContext from "../../context/UserContext";
 import domain from "../../util/domain";
 
@@ -59,19 +61,28 @@ function Home(){
 
     return(
         <section className='web-area'>
+            {/* IF the user is not logged in tell them to do so */}
             {user === null ? (
                 <>
-                    <p className='no-tweets-msg'>
+                    {/* <p className='no-tweets-msg'>
                         Please log in or register an account to Tweet
-                    </p>
-                    
+                    </p> */}
+                    <Header/>
                 </>
                 
                 
             ): (
-                <TweetBox getTweetsFunction={getTweets} /> 
+                <>
+                {user && (
+                            user.username === 'POTUS' && (<TweetBox getTweetsFunction={getTweets} />))}
+                    
+                    <Header/>
+                </>
+                
+                
             )}
 
+            {/* This area displays the Tweets that are sent */}
             {loading ? (
                 <Loading/>
             ):

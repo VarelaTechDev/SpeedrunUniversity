@@ -64,7 +64,7 @@ router.post('/', auth, async(req, res) => {
 
 // ^ DELETE request :: Deletes the Tweet that has that TweetID
 router.delete('/:id', auth, async(req, res) => {
-    // ? auth middleware: checks to see if the user has barbter_cookie 
+    // ? auth middleware: checks to see if the user has speedrun_cookie
     try{
         // * Get the TweetID 
         const tweetId = req.params.id
