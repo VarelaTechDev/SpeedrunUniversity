@@ -16,7 +16,7 @@ const app = express()
 app.use(express.json())
 // * A mini-whitelist to what links are and are not allowed to send data
 app.use(cors({
-    origin:['http://localhost:3000','http://localhost:3000','https://barbter.netlify.app'],
+    origin:['http://localhost:3000','https://speedrununi.netlify.app'],
     credentials: true,
     exposedHeaders: ['speedrun_cookie']
 }))

@@ -71,12 +71,11 @@ function SingleProfile({userData}) {
                 </div>
 
                 <div className='profile-text-section'>
-                    <p>Hoping to complete 100 days of code</p>
                     <p>Joined [Find the data later]</p>
                 </div>
                 
                 <div className='follow-following-section'>
-                    <p>0 Following 0 Followers</p>
+                    <p></p>
                 </div>
             </div>
 
