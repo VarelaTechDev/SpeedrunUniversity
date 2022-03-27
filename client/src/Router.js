@@ -11,6 +11,9 @@ import Profile from "./components/sidebar/Profile";
 
 import Blackboard from "./components/blackboard/Blackboard";
 
+import ClassLearning from "./components/classLearning/ClassLearning";
+
+
 function RouterPage() {
     return  (
         <BrowserRouter>
@@ -35,6 +38,10 @@ function RouterPage() {
 
                 <Route path='blackboard' element={
                     <Blackboard/>
+                }/>
+
+                <Route path='class/:classId' element={
+                    <ClassLearning/>
                 }/>
             </Routes>
 

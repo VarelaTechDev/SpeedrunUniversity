@@ -1,0 +1,9 @@
+@import '../../../style/breakpoints.scss';
+@import '../../../style/mixins.scss';
+
+.class{
+    margin: 0.5em 1rem 1rem 0.5em;
+    border: 1px solid black;
+    border-left: 5px pink solid;
+    padding: 0.2em 0 0.5em 0.5em;
+}
