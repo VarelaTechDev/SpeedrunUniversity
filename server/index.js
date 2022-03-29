@@ -33,7 +33,8 @@ app.listen(PORT, () => console.log(`Server started on ${PORT}`))
 app.use('/tweet', require('./router/tweetRouter'))
 
 // * Middleware for logging in
-app.use('/auth', require('./router/userRouter'))
+//app.use('/auth', require('./router/userRouter'))
+app.use('/auth', require('./router/studentRouter'))
 
 // * MongoDB [Local Version for speed]
  
