@@ -2,8 +2,6 @@ const mongoose = require('mongoose')
 const {id, name, professor, material} = require('./classInfo')
 
 const Class = require('../models/classModel')
-const Student = require('../')
-
 
 mongoose.connect(`mongodb://localhost:27017/sru`, 
     (err) => {
@@ -18,7 +16,7 @@ const seedDB = async() => {
     await Class.deleteMany({})
         
     const programmingClass = new Class({
-        id: id[0],
+        ClassId: id[0],
         Name: name[0],
         Professor: professor[0],
         Material: {
@@ -39,7 +37,7 @@ const seedDB = async() => {
     })
     
     const mathClass = new Class({
-        id: id[1],
+        ClassId: id[1],
         Name: name[1],
         Professor: professor[1],
         Material: {

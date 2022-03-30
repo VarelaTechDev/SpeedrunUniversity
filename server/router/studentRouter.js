@@ -290,83 +290,108 @@ router.get('/loggedIn', async(req, res) => {
     }
 })
 
-// ! Register for a class
-router.put('/:username/:classId', async(req, res) => {
-    const {username, classId} = req.params
+// ! SEMESTER ONE ONLY WITH TWO CLASSES!
+router.put('/:username/:semesterNum/:ClassId', async(req, res) => {
+    const {username, ClassId, semesterNum} = req.params
 
-    if(!username){
-        return res.status.json({
-            errorMessage: 'No username detected'
-        })
+    if(!username || !ClassId || !semesterNum){
+        if(!ClassId) return res.status(401).json({errorMessage: 'No classId detected'})
+        if(!semesterNum) return res.status(401).json({errorMessage: 'No semester number detected detected'})
+        
+        return res.status(401).json({errorMessage: 'No username detected'})
     }
 
-    
     const existingStudent = await Student.findOne({username})
 
+
     if(!existingStudent){
-        return res.status(401).json({
-            errorMessage: "Student doesn't exist"
-        })
+        return res.status(401).json({errorMessage: "Student doesn't exist"})
     }
 
+    let getClass = await Classes.findOne({ClassId})
+    //return res.send(await Classes.find({ClassId}))
+
+    if(semesterNum == 1){
+        if(existingStudent.semesterOne.classOneId == undefined){
+            existingStudent.semesterOne.classOneId = getClass._id
+            await existingStudent.save()
+            return res.send(existingStudent)
+        }
+        // * There is something in the second class, so we are already full
+        if(existingStudent.semesterOne.classTwoId != undefined){
+            return res.status(401).json({errorMessage: 'Drop a class before applying for a new one'})
+        }
     
-    const getClass = await Classes.findOne({classId})
+        existingStudent.semesterOne.classTwoId = getClass._id
+        await existingStudent.save()
+        return res.send(existingStudent)
+    }
 
-    // ! Warning, we can correct set only the first course 
-    // ! We havent checked if getClass exist or not
-    //existingStudent.semesterOne[0] = getClass._id
-    existingStudent.semesterOne.classOneId = getClass._id
+    if(semesterNum == 2){
+        if(existingStudent.semesterTwo.classOneId == undefined){
+                existingStudent.semesterTwo.classOneId = getClass._id
+                await existingStudent.save()
+                return res.send(existingStudent)
+            }
+            
+            // * There is something in the second class, so we are already full
+            if(existingStudent.semesterTwo.classTwoId != undefined){
+                return res.status(401).json({errorMessage: 'Drop a class before applying for a new one'})
+            }
+
+            existingStudent.semesterTwo.classTwoId = getClass._id
+            await existingStudent.save()
+            return res.send(existingStudent)
+    }
+
+    return res.status(401).json({errorMessage: 'Invalid semester number. Please enter semester 1 or semester 2'})
     
-    await existingStudent.save()
-
-    res.send(existingStudent)
-
 })
 
 
+// ? localhost:5000/auth/JohnUser
+// ! Problem: Anyone with the link can access this data!
 router.get('/:username', async(req, res) => {
     try{
-
         const {username} = req.params
 
         if(!username){
-            return res.status.json({
+            return res.status(401).json({
                 errorMessage: 'No username detected'
             })
         }
-
         
         const existingUser = await Student.findOne({username})
-
+        
         if(!existingUser){
             return res.status(401).json({
                 errorMessage: "User doesn't exist"
             })
         }
-        //console.log(existingUser)
-
-        // ? Populate the data??
-        console.log(Student.find())
-        // const getClass = await Student.find({username}).populate({
-        //     path: 'semesterOne', 
-        //     populate: {
-        //         path: 'classOneId'
-        //     }
-        // })
-
-        // let getClass = await Student.find({username})
-        // .populate('semesterOne.classOneId')
-        //const testMe = await Student.find({username}).populate({path:`${getClass[0]}`})
-        //getClass = await Student.find({username}).populate({path:`semesterOne`, populate:({path:'classOneId'})})
         
-        // return res.json({
-        //     username: existingUser.username,
-        //     profileBanner: existingUser.profileBanner,
-        //     profilePicture: existingUser.profilePicture,
-        //     semesterOne: existingUser.semesterOne
-        // })
-        //return res.send(existingUser)
-        return res.send(await Student.find({username}).populate({path: 'semesterOne.classOneId', select: ['Name']}))
+        // * Populate the data
+        return res.json(await Student.find({username})
+        .populate({
+                path: 'semesterOne.classOneId', 
+                //select: ['Name', 'Professor','Material.chapterOne.reading']
+                select: ['Name']
+            })
+        .populate({
+            path: 'semesterOne.classTwoId', 
+            //select: ['Name', 'Professor','Material.chapterOne.reading']
+            select: ['Name']
+        })
+        .populate({
+            path: 'semesterTwo.classOneId', 
+            //select: ['Name', 'Professor','Material.chapterOne.reading']
+            select: ['Name']
+        })
+        .populate({
+            path: 'semesterTwo.classTwoId', 
+            //select: ['Name', 'Professor','Material.chapterOne.reading']
+            select: ['Name']
+        })
+            )
     }catch(err){
         return res.json(500).send()
     }

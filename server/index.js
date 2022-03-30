@@ -30,7 +30,8 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server started on ${PORT}`))
 
 // * Middleware for sending Tweets
-app.use('/tweet', require('./router/tweetRouter'))
+//app.use('/tweet', require('./router/tweetRouter'))
+app.use('/courses', require('./router/classRouter'))
 
 // * Middleware for logging in
 //app.use('/auth', require('./router/userRouter'))
