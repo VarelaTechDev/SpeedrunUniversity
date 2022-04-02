@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, useParams } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom'
 import Sidebar from "./components/sidebar/Sidebar";
 
 import WebArea from "./components/home/WebArea";
@@ -16,7 +16,7 @@ import ClassLearning from "./components/classLearning/ClassLearning";
 
 function RouterPage() {
     return  (
-        <BrowserRouter>
+        <Router>
             <Sidebar/>
             
             <Routes className='sidebar-links'>
@@ -24,25 +24,15 @@ function RouterPage() {
                     <WebArea/>
                 }/>
 
-                <Route path='profile/:username' element={
-                    <Profile/>
-                }/>
+                <Route path='profile/:username' element={<Profile/>}/>
 
-                <Route path='/login' element={
-                    <Login/>
-                }/>
+                <Route path='/login' element={<Login/>}/>
 
-                <Route path='register' element={
-                    <Register/>
-                }/>
+                <Route path='/register' element={<Register/>}/>
 
-                <Route path='blackboard' element={
-                    <Blackboard/>
-                }/>
+                <Route path='/blackboard' element={<Blackboard/>}/>
 
-                <Route path='class/:classId' element={
-                    <ClassLearning/>
-                }/>
+                <Route path='class/:classId' element={<ClassLearning/>}/>
             </Routes>
 
             {/* <Routes className='mainside-links'>
@@ -52,7 +42,7 @@ function RouterPage() {
             </Routes> */}
             
             
-        </BrowserRouter>
+        </Router>
     )
 };
 

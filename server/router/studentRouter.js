@@ -279,11 +279,13 @@ router.get('/loggedIn', async(req, res) => {
         const existingUser = await Student.findById(validatedUser.id)
         
         // * Gives us the user email and username 
-        res.json({
-            email: existingUser.email,
-            username: existingUser.username,
-            profilePicture: existingUser.profilePicture
-        })
+        res.send(
+            //email: existingUser.email,
+            //username: existingUser.username,
+            //profilePicture: existingUser.profilePicture
+            // ! Just give them everything
+            existingUser
+        )
         
     }catch(err){
         return res.json(null)
