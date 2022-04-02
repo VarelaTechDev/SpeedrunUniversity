@@ -9,6 +9,7 @@ const studentSchema = new mongoose.Schema({
     profilePicture: {type: String, },
     ProfileBanner: {type: String, },
     passwordHash:{type: String, },
+    completedSemesterOne: {type: Boolean, default: false},
     semesterOne: 
         {
             classOneId: {
@@ -22,6 +23,7 @@ const studentSchema = new mongoose.Schema({
             ref: 'class'
         },
     },
+    completedSemesterTwo: {type: Boolean, default: false},
     semesterTwo: {
         classOneId: {
             type: ObjectId,

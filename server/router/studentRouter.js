@@ -13,7 +13,7 @@ const auth = require('../middleware/auth')
 router.post('/register', async(req, res) => {
     try{
         // * Destructure it for ease of access
-        const {name, email, username, password, passwordVerify} = req.body
+        const {name, email, username, profilePicture, password, passwordVerify} = req.body
         
         // * User is missing fields
         if(!name ||!email || !username || !password || !passwordVerify ){
@@ -98,7 +98,7 @@ router.post('/register', async(req, res) => {
             email,
             username,
             profileBanner: 'https://res.cloudinary.com/durogtr7u/image/upload/v1641253201/banner_kbfvfr.png',
-            profilePicture: 'https://res.cloudinary.com/durogtr7u/image/upload/v1641249658/no_pfp_vlrxz1.png',
+            profilePicture,
             passwordHash
         })
 

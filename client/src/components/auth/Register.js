@@ -11,7 +11,10 @@ import ErrorMessage from '../misc/ErrorMessage'
 
 import './AuthForm.scss'
 
+// ! names, email, username, password, passwordVerify
+
 function Register(){
+    const [formName, setFormName] = useState('')
     const [formEmail, setFormEmail] = useState('')
     const [formUsername, setFormUsername] = useState('')
     const [formPassword, setFormPassword] = useState('')
@@ -27,15 +30,18 @@ function Register(){
         e.preventDefault()
 
         const registerData = {
+            name: formName,
             email: formEmail,
             username: formUsername,
+            profilePicture: 'https://i.pinimg.com/originals/d3/e2/68/d3e268778a77cc1df25d03f004956da3.png',
             password: formPassword,
             passwordVerify: formPasswordVerify
         }
 
         try{
             await Axios.post(`${domain}/auth/register`, registerData)
-        }catch(err){
+        }
+        catch(err){
             if(err.response){
                 setErrorMessage(err.response.data.errorMessage)
             }    
@@ -59,10 +65,21 @@ function Register(){
 
             <form className='form-regLog' onSubmit={register}>
                 <div className="line-up">
+                    <label htmlFor="form-email">Name:</label>
+                    <input 
+                        id='form-name'
+                        type="text" 
+                        value={formName}
+                        onChange={(e)=> setFormName(e.target.value)}
+                    />
+                </div>
+
+
+                <div className="line-up">
                     <label htmlFor="form-email">Email:</label>
                     <input 
                         id='form-email'
-                        type="email" 
+                        type="text" 
                         value={formEmail}
                         onChange={(e)=> setFormEmail(e.target.value)}
                     />

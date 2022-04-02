@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from "react";
+import React, {useState, useEffect, createContext, useContext} from "react";
 import Loading from "../misc/LoadingThing";
 
 import domain from "../../util/domain";
@@ -7,16 +7,20 @@ import SingleProfile from './SingleProfile'
 import ErrorMessage from "../misc/ErrorMessage";
 
 import { useParams } from "react-router-dom";
+import UserContext from '../../context/UserContext'
 
 const Axios = require('axios')
 
-const UserContext = createContext()
+//const UserContext = createContext()
+
 
 
 
 function Profile() {
+    const {getUser, user} = useContext(UserContext)
+
     const [loading, setLoading] = useState(true)
-    const[userRes, setUserRes] = useState(null)
+    const[userRes, setUserRes] = useState(null) 
 
     const params = useParams()
 

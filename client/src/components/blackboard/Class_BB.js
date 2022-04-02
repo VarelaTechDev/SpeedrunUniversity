@@ -4,6 +4,8 @@ import ClassComp from './ClassComp/ClassComp'
 
 import './Class_BB.scss'
 
+import UserContext from '../../context/UserContext'
+
 function Class_BB() {
   return (
     <section>

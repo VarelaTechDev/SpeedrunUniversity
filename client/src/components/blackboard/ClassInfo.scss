@@ -1,0 +1,21 @@
+@import '../../style/breakpoints.scss';
+@import '../../style/mixins.scss';
+
+.classInfo-section{
+    position: absolute;
+    top: 0; 
+    right: 0;
+    @include sm(){
+        left: 9%; 
+    }
+    @include md(){
+        left: 14%; 
+    }
+    @include lg(){
+        left: 17%; 
+    }
+    
+    bottom: 0;
+    height: 100vh;
+    
+}
