@@ -14,6 +14,8 @@ import './ClassRegister.scss'
 
 import ClassInfo from "./ClassInfo";
 
+import DisplayModule from "./DisplayModule";
+
 function ClassRegister() {
     // ! TEMP HOLDER TO REMOVE ERRORS
     const classId = 120
@@ -26,10 +28,16 @@ function ClassRegister() {
 
     const navigate = useNavigate()
 
+    const [klass, setKlasses] = useState([])
+
     useEffect(() => {
         getClasses()
-        getUser()
     }, [])
+
+    async function getClasses(){
+        const classResponse = await Axios.get(`${domain}/courses/list`)
+        setKlasses(classResponse.data)
+    }
 
     async function submitClass(e){
         e.preventDefault()
@@ -53,32 +61,28 @@ function ClassRegister() {
         navigate('/blackboard')
     }
 
-    async function getClasses(e){
-        const classList = await Axios.get(`${domain}/courses/list`)
-        setListOfClasses(classList)
-
-        let list = [listOfClasses]
-        return list[0].data.map((classBox, i) => {
-            return(
-                <ClassInfo
-                    key={i}
-                    classData={classBox}
-                    getClassFunction={getClasses}
-                />
-            )
-        })
-    }
-
-    function renderClasses(){
-
-    }
-
-
     return  (
         <div className="class-form">
-            {renderClasses()}
+            <p>
+                The following classes are taught at Speedrun University:
+            </p>
+            {klass.length == 0 || user == null? 
+                ('Loading')    
+                :
+                (
+                    //'Look at me'
+                    klass.map((item, i) => {
+                        //console.log(item.Name)
+                        // return <p key={i}>{
+                        //     item.Name
+                        // }</p>
+                        return <DisplayModule key={i} ClassId={item.ClassId} Name={item.Name} Professor={item.Professor} UserData={user}/>
+                    })
+                    
+                )
+            }
         </div>
     )
-};
+}
 
 export default ClassRegister;

@@ -5,6 +5,9 @@ import './Blackboard.scss'
 import UserContext from '../../context/UserContext'
 import { Link } from 'react-router-dom'
 
+
+import StudentModule from './StudentModule'
+
 function Blackboard() {
   
   const {getUser, user} = useContext(UserContext)
@@ -36,10 +39,18 @@ function Blackboard() {
         :
           (
             <>
-              <p>Data loaded</p>
-              
-              {console.log(user)}
+              {user.semesterOne === undefined ? 
+                (
+                  <>
+                    <Link to='/classRegister'>Please register for a class</Link>
+                  </>
+                ) : 
+                (
+                  <StudentModule userData={user}/>
+                )
+              }
             </>
+            
             
           )
         }

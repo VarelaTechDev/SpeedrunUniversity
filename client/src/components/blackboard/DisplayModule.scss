@@ -1,0 +1,23 @@
+@import '../../style/breakpoints.scss';
+@import '../../style/mixins.scss';
+
+.class{
+    display: flex;
+    margin-top: 1rem;
+    padding: 0.2rem;
+    border: 1px black solid;
+    justify-content: space-between;
+    .classInfo{
+        width: 50%;
+        background-color: aqua;
+    }
+    button{
+        margin-right: 0.2em;
+        padding: 0.2em;
+        background-color: red;
+        &:hover{
+            background-color: pink;
+            color: white;
+        }
+    }
+}

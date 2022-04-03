@@ -376,7 +376,7 @@ router.get('/:username', async(req, res) => {
         .populate({
                 path: 'semesterOne.classOneId', 
                 //select: ['Name', 'Professor','Material.chapterOne.reading']
-                select: ['Name']
+                select: ['ClassId', 'Name', 'Professor', 'Material']
             })
         .populate({
             path: 'semesterOne.classTwoId', 
