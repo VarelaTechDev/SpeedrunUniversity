@@ -9,31 +9,13 @@ const studentSchema = new mongoose.Schema({
     profilePicture: {type: String, },
     ProfileBanner: {type: String, },
     passwordHash:{type: String, },
+    courses: [{
+        type: ObjectId,
+        ref: 'class'
+    }],
+
     completedSemesterOne: {type: Boolean, default: false},
-    semesterOne: 
-        {
-            classOneId: {
-                type: ObjectId,
-                ref: 'class'
-            },
-
-
-        classTwoId: {
-            type: ObjectId,
-            ref: 'class'
-        },
-    },
     completedSemesterTwo: {type: Boolean, default: false},
-    semesterTwo: {
-        classOneId: {
-            type: ObjectId,
-            ref: 'class'
-        },
-        classTwoId: {
-            type: ObjectId,
-            ref: 'class'
-        },
-    }
 },
 {
     timestamps: true,

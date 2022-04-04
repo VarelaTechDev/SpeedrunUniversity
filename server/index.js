@@ -11,6 +11,14 @@ const morgan = require('morgan')
 
 const app = express()
 
+// ? How to remove a specific thing from an array
+// var toRemove = 1;
+// var arr = [1, 2, 3, 4, 5];
+// arr = arr.filter(function(item) {
+//     return item !== toRemove
+// });
+// console.log(arr)
+
 
 // * JSON Middleware + Allow you to POST
 app.use(express.json())
@@ -36,8 +44,6 @@ app.use('/courses', require('./router/classRouter'))
 // * Middleware for logging in
 //app.use('/auth', require('./router/userRouter'))
 app.use('/auth', require('./router/studentRouter'))
-
-app.use('/test', require('./test/test'))
 
 // * MongoDB [Local Version for speed]
  

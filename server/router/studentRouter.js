@@ -304,16 +304,16 @@ router.get('/loggedIn', async(req, res) => {
 // }) 
 
 // ! SEMESTER ONE ONLY WITH TWO CLASSES!
-router.put('/:username/:semesterNum/:ClassId', async(req, res) => {
-    const {username, ClassId, semesterNum} = req.params
+router.put('/:username/:ClassId', async(req, res) => {
+    const {username, ClassId} = req.params
 
-    if(!username || !ClassId || !semesterNum){
+    if(!username || !ClassId){
         if(!ClassId) return res.status(401).json({errorMessage: 'No classId detected'})
-        if(!semesterNum) return res.status(401).json({errorMessage: 'No semester number detected detected'})
         
         return res.status(401).json({errorMessage: 'No username detected'})
     }
 
+    // ? Find the student
     const existingStudent = await Student.findOne({username})
 
 
@@ -321,43 +321,15 @@ router.put('/:username/:semesterNum/:ClassId', async(req, res) => {
         return res.status(401).json({errorMessage: "Student doesn't exist"})
     }
 
+    // ? Find the class
     let getClass = await Classes.findOne({ClassId})
-    //return res.send(await Classes.find({ClassId}))
-
-    if(semesterNum == 1){
-        if(existingStudent.semesterOne.classOneId == undefined){
-            existingStudent.semesterOne.classOneId = getClass._id
-            await existingStudent.save()
-            return res.send(existingStudent)
-        }
-        // * There is something in the second class, so we are already full
-        if(existingStudent.semesterOne.classTwoId != undefined){
-            return res.status(401).json({errorMessage: 'Drop a class before applying for a new one'})
-        }
     
-        existingStudent.semesterOne.classTwoId = getClass._id
-        await existingStudent.save()
-        return res.send(existingStudent)
-    }
 
-    if(semesterNum == 2){
-        if(existingStudent.semesterTwo.classOneId == undefined){
-                existingStudent.semesterTwo.classOneId = getClass._id
-                await existingStudent.save()
-                return res.send(existingStudent)
-            }
-            
-            // * There is something in the second class, so we are already full
-            if(existingStudent.semesterTwo.classTwoId != undefined){
-                return res.status(401).json({errorMessage: 'Drop a class before applying for a new one'})
-            }
-
-            existingStudent.semesterTwo.classTwoId = getClass._id
-            await existingStudent.save()
-            return res.send(existingStudent)
-    }
-
-    return res.status(401).json({errorMessage: 'Invalid semester number. Please enter semester 1 or semester 2'})
+    
+    existingStudent.courses.push(getClass)  
+    //existingStudent.semesterOne.classOneId = getClass._id
+    await existingStudent.save()
+    return res.send(existingStudent)
     
 })
 
@@ -384,31 +356,12 @@ router.get('/:username', async(req, res) => {
         
         // * Populate the data
         return res.json(await Student.find({username})
-        .populate({
-                path: 'semesterOne', 
-                populate: {
-                    path: 'classOneId',
-                    select: ['ClassId', 'Name', 'Professor', 'Material']
-                }
-                //select: ['Name', 'Professor','Material.chapterOne.reading']
-                // select: ['ClassId', 'Name', 'Professor', 'Material']
+            .populate({
+                path: 'courses',
+                //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
+                select:['ClassId', 'Name', 'Professor', 'Material']
             })
-        .populate({
-            path: 'semesterOne.classTwoId', 
-            //select: ['Name', 'Professor','Material.chapterOne.reading']
-            select: ['ClassId', 'Name', 'Professor', 'Material']
-        })
-        .populate({
-            path: 'semesterTwo.classOneId', 
-            //select: ['Name', 'Professor','Material.chapterOne.reading']
-            select: ['ClassId', 'Name', 'Professor', 'Material']
-        })
-        .populate({
-            path: 'semesterTwo.classTwoId', 
-            //select: ['Name', 'Professor','Material.chapterOne.reading']
-            select: ['ClassId', 'Name', 'Professor', 'Material']
-        })
-            )
+        )
     }catch(err){
         return res.json(500).send()
     }
