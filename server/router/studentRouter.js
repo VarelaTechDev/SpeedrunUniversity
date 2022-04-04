@@ -292,6 +292,17 @@ router.get('/loggedIn', async(req, res) => {
     }
 })
 
+// router.get('/:username', async(req, res) => {
+//     const {username} = req.params
+//     if(!username) return res.status(401).json({errorMessage: 'No username detected'})
+
+//     const existingStudent = await Student.findOne({username})
+
+//     if(!existingStudent) return res.status(401).json({errorMessage: "Student doesn't exist"})
+
+    
+// }) 
+
 // ! SEMESTER ONE ONLY WITH TWO CLASSES!
 router.put('/:username/:semesterNum/:ClassId', async(req, res) => {
     const {username, ClassId, semesterNum} = req.params
@@ -374,24 +385,28 @@ router.get('/:username', async(req, res) => {
         // * Populate the data
         return res.json(await Student.find({username})
         .populate({
-                path: 'semesterOne.classOneId', 
+                path: 'semesterOne', 
+                populate: {
+                    path: 'classOneId',
+                    select: ['ClassId', 'Name', 'Professor', 'Material']
+                }
                 //select: ['Name', 'Professor','Material.chapterOne.reading']
-                select: ['ClassId', 'Name', 'Professor', 'Material']
+                // select: ['ClassId', 'Name', 'Professor', 'Material']
             })
         .populate({
             path: 'semesterOne.classTwoId', 
             //select: ['Name', 'Professor','Material.chapterOne.reading']
-            select: ['Name']
+            select: ['ClassId', 'Name', 'Professor', 'Material']
         })
         .populate({
             path: 'semesterTwo.classOneId', 
             //select: ['Name', 'Professor','Material.chapterOne.reading']
-            select: ['Name']
+            select: ['ClassId', 'Name', 'Professor', 'Material']
         })
         .populate({
             path: 'semesterTwo.classTwoId', 
             //select: ['Name', 'Professor','Material.chapterOne.reading']
-            select: ['Name']
+            select: ['ClassId', 'Name', 'Professor', 'Material']
         })
             )
     }catch(err){

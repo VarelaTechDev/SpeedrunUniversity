@@ -19,9 +19,6 @@ import UserContext from "./context/UserContext";
 
 
 function RouterPage() {
-    
-    const {getUser, user} = useContext(UserContext)
-
     return  (
         <Router>
             <Sidebar/>

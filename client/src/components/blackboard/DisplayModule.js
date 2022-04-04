@@ -14,7 +14,7 @@ function DisplayModule({ClassId, Name, Professor, UserData}) {
     const [errorMessage, setErrorMessage] = useState(null)
 
     const {getUser, user} = useContext(UserContext)
-    
+
     const [username, setUsername] = useState(UserData.username)
     const [name, setName] = useState(Name)
     const [professor, setProfessor] = useState(Professor)
@@ -43,7 +43,23 @@ function DisplayModule({ClassId, Name, Professor, UserData}) {
         await getUser()
         navigate('/blackboard')
     }
+
     
+    async function checkForClasses(userData, ClassId){
+        if(!userData.semesterOne) return false
+        
+        if(userData.semesterOne.classOneId == ClassId) return true
+
+        if(userData.semesterOne.classTwoId == ClassId) return true
+        
+        if(!userData.semesterTwo) return false
+        if(userData.semesterTwo.classOneId == ClassId) return true
+
+        if(userData.semesterTwo.classTwoId == ClassId) return true
+
+        return false;
+    }
+
     return  (
         // <div className="class">
         <form className='class' onSubmit={applyForClass}>
@@ -55,7 +71,10 @@ function DisplayModule({ClassId, Name, Professor, UserData}) {
             </div>
             
             <div className='misc'>
-                <button className='btn-submit' type='submit'>
+                <button 
+                    className='btn-submit' 
+                    type='submit'
+                >
                     Click to Apply
                 </button>
             </div>

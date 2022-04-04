@@ -37,6 +37,8 @@ app.use('/courses', require('./router/classRouter'))
 //app.use('/auth', require('./router/userRouter'))
 app.use('/auth', require('./router/studentRouter'))
 
+app.use('/test', require('./test/test'))
+
 // * MongoDB [Local Version for speed]
  
 //mongoose.connect(`mongodb+srv://rosenthal:${process.env.MONGO_PASSWORD}@arisadatabase.wez6h.mongodb.net/speedrunDB?retryWrites=true&w=majority`,

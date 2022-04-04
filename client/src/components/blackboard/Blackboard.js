@@ -11,28 +11,16 @@ import StudentModule from './StudentModule'
 function Blackboard() {
   
   const {getUser, user} = useContext(UserContext)
-  // ! This seems to have fixed the refreshing breaking bug that makes user is null
-  // TODO: Refreshing the page sends two request
+  // !Refreshing the page sends two request
   
 
-  // useEffect(() => {
-  //   getUserInfo()
-  // },[])
-  
-  // async function getUserInfo(){
-  //   const userData = await getUser
-  //   setUserRes(userData)
 
-  // }
-
-  //const[userRes, setUserRes] = useState(getUser) 
-
-
-
+  // TODO WE ARE ONLY FOCUSING ON SEMESTER ONE!! THIS ISNT DYNAMIC!!!!
+  // TODO: We want user to be and have populated
   return (
     <section className='blackboard'>
       {/* ! IMPORTANT THIS IS HOW WE PREVENT NULL WHEN REFRESHING THE PAGE FROM BREAKIGN THE WEBSITE */}
-        {user === null || user.username === null ? 
+        {user === null || user.username === null? 
           (
             'Loading'
           ) 
@@ -46,7 +34,12 @@ function Blackboard() {
                   </>
                 ) : 
                 (
-                  <StudentModule userData={user}/>
+                  <>
+                    <Link to='/classRegister'>Register for more!</Link>
+                    {console.log('SUS')}
+                    {console.log(user)}
+                    {/* <StudentModule userData={user}/> */}
+                  </>
                 )
               }
             </>
