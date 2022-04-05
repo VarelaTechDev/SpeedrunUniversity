@@ -1,12 +1,15 @@
-// > How our server will handle a person logging and registering for an account
+// > app.use('/auth', require('./router/studentRouter'))
 const router = require('express').Router()
 
+// ? Our databases model
 const Classes = require('../models/classModel')
 const Student = require('../models/studentModel')
 
+// ? npm libraries
 const bycrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+// ? middle ware
 const auth = require('../middleware/auth')
 
 // ^ POST request :: User wants to register for an account
