@@ -1,3 +1,12 @@
+// ? How to remove a specific thing from an array
+// var toRemove = 1;
+// var arr = [1, 2, 3, 4, 5];
+// arr = arr.filter(function(item) {
+//     return item !== toRemove
+// });
+// console.log(arr)
+
+
 Use percentages for widths NOT FIXED PIXELS
 
 Use em for fonts
