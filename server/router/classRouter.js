@@ -6,6 +6,7 @@ const Classes = require('../models/classModel')
 router.get('/list', async(req, res) => {
     try{
         const courses = await Classes.find()
+        
         return res.send(courses)
 
     }catch(err) {res.status(500).send()}
