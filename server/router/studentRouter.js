@@ -215,6 +215,35 @@ router.get('/:username', async(req, res) => {
     }
 })
 
+// GO HERE WHEN WE CLICK ON A COURSE LINK
+router.get('/courses/:username/:courseId', async(req, res) => {
+
+})
+
+// USE THIS TO GET DATA ABOUT THE USER AND PARSE IT TO A READABLE FORMAT
+router.get('/courses/:username', async(req, res) => {
+    try{
+        const {username} = req.params
+
+        if(!username){return res.status(401).json({errorMessage: 'No username detected'})}
+        
+        const existingUser = await Student.findOne({username})
+        
+        if(!existingUser){return res.status(401).json({errorMessage: "User doesn't exist"})}
+        
+        // * Populate the data
+        return res.json(await Student.find({username})
+            .populate({
+                path: 'courses',
+                //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
+                select:['ClassId', 'Name', 'Professor', 'Material']
+            })
+        )
+    }catch(err){
+        return res.json(500).send()
+    }
+
+})
 
 // ! LEGACY CODE BELOW
 
