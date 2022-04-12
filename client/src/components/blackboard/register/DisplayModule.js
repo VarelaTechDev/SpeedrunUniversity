@@ -1,11 +1,11 @@
-import React, {useState, useEffect, createContext, useContext} from "react";
+import React, {useState, useContext} from "react";
 
 import { useNavigate } from 'react-router'
 
 import Axios from 'axios'
 
-import UserContext from '../../context/UserContext'
-import domain from '../../util/domain'
+import UserContext from '../../../context/UserContext'
+import domain from '../../../util/domain'
 
 import './DisplayModule.scss'
 
@@ -32,7 +32,7 @@ function DisplayModule({ClassId, Name, Professor, UserData}) {
 
         try{
             //await Axios.post(`${domain}/auth/login`, loginData)
-            await Axios.put(`${domain}/auth/${UserData.username}/${1}/${ClassId}`)
+            await Axios.put(`${domain}/auth/${UserData.username}/${ClassId}`)
         }catch(err){
             if(err.response){
                 setErrorMessage(err.response.data.errorMessage)
@@ -44,21 +44,6 @@ function DisplayModule({ClassId, Name, Professor, UserData}) {
         navigate('/blackboard')
     }
 
-    
-    async function checkForClasses(userData, ClassId){
-        if(!userData.semesterOne) return false
-        
-        if(userData.semesterOne.classOneId == ClassId) return true
-
-        if(userData.semesterOne.classTwoId == ClassId) return true
-        
-        if(!userData.semesterTwo) return false
-        if(userData.semesterTwo.classOneId == ClassId) return true
-
-        if(userData.semesterTwo.classTwoId == ClassId) return true
-
-        return false;
-    }
 
     return  (
         // <div className="class">

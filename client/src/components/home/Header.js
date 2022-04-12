@@ -2,15 +2,15 @@ import React from 'react'
 
 import mysrupic from '../../images/mysrupic.png'
 
-import './Header.scss'
-
 function Header() {
   return (
     <section className='header'>
         <img src={mysrupic} alt="" />
+
         <div className='campus_announcements_header'>
             <h2>Campus Announcements</h2>
         </div>
+
         <div className='campus_text'>
             <b>Disabled Accounts for Non-Continuing Students</b>
             <p>

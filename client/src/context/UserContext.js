@@ -1,24 +1,19 @@
 // > Global [Instance class] that gives us access to variables for our entire application
 // ? useContext is the highest parent component that reduces the usage of 'prop drilling'
-
 import React, { createContext, useEffect, useState } from "react";
-
 import domain from '../util/domain'
 
 const Axios = require('axios')
-
 const UserContext = createContext()
 
+// ! We modified it to res.send(existingUser) We have everything
 function UserContextProvider(props) {    
     const [user, setUser] = useState(null)
 
+    // ? At server > userRouter.js
     async function getUser(){
         const userResId = await Axios.get(`${domain}/auth/loggedIn`)
-        // ? At server > userRouter.js
-        // Go to router.get('/loggedIn') and set res.json to get more user data
-        // ! We modified it to res.send(existingUser) We have everything
         setUser(userResId.data)
-        console.log(user)
     }
 
     // * Loading the app will run getUser()

@@ -83,20 +83,15 @@ function Register(){
                         value={formEmail}
                         onChange={(e)=> setFormEmail(e.target.value)}
                     />
-                </div>
-
-                <div className="line-up">
-                    <label htmlFor="form-username">Username:</label>
-                    
+            
+                    <label htmlFor="form-username">Username:</label>        
                     <input 
                         id='form-username'
                         type="text" 
                         value={formUsername}
                         onChange={(e)=> setFormUsername(e.target.value)}
                     />
-                </div>
-
-                <div className="line-up">
+                
                     <label htmlFor="form-password">Password:</label>
                     <input 
                         id='form-password'
@@ -104,9 +99,7 @@ function Register(){
                         value={formPassword}
                         onChange={(e)=> setFormPassword(e.target.value)}
                     />
-                </div>
                 
-                <div className="line-up">
                     <label htmlFor="form-passwordVerify">Verify Password:</label>
                     <input 
                         id='form-passwordVerify'

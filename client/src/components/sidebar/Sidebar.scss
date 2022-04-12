@@ -11,9 +11,8 @@
 
     border-right:1px solid gray;
 
-    // * Annotate for other sizes
+    // ? breakpoints.scss
     @include sm(){
-        // Size for a small sidebar
         width: 9%;
         height: 100vh;    
         justify-content: space-between;
@@ -103,10 +102,8 @@
             }
         }
     }
-    // > End of small settings
 
 
-    
     @include md(){
         width: 14%;
         height: 100vh;    
@@ -196,6 +193,7 @@
             }
         }
     }
+
 
     @include lg(){
         font-size: 0.6em;

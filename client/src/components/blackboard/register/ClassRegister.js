@@ -1,18 +1,16 @@
-import React, {useState, useEffect, createContext, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
 
 import Axios from 'axios'
 import { useNavigate } from 'react-router'
 
 import { Link } from 'react-router-dom'
 
-import UserContext from '../../context/UserContext'
-import domain from '../../util/domain'
+import UserContext from '../../../context/UserContext'
+import domain from '../../../util/domain'
 
-import ErrorMessage from '../misc/ErrorMessage'
+import ErrorMessage from '../../misc/ErrorMessage'
 
 import './ClassRegister.scss'
-
-import ClassInfo from "./ClassInfo";
 
 import DisplayModule from "./DisplayModule";
 
@@ -37,28 +35,6 @@ function ClassRegister() {
     async function getClasses(){
         const classResponse = await Axios.get(`${domain}/courses/list`)
         setKlasses(classResponse.data)
-    }
-
-    async function submitClass(e){
-        e.preventDefault()
-        const classData = {
-            username: user.username,
-            semesterNum: 1,
-            ClassId: classId
-        }
-
-        try{
-            //await Axios.post(`${domain}/auth/login`, loginData)
-            await Axios.put(`${domain}/${user.username}/${1}/${classId}`)
-        }catch(err){
-            if(err.response){
-                setErrorMessage(err.response.data.errorMessage)
-            }
-            return
-        }
-        // Meant to update the user
-        await getUser()
-        navigate('/blackboard')
     }
 
     return  (

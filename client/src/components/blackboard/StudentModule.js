@@ -6,7 +6,7 @@ import './StudentModule.scss'
 import domain from "../../util/domain";
 
 import CourseModule from "./CourseModule";
-import DisplayModule from "./DisplayModule";
+import DisplayModule from "./register/DisplayModule";
 
 function StudentModule({userData}) {
     const [student, setStudent] = useState([])

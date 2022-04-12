@@ -1,35 +1,38 @@
-import React, {useState, useEffect, createContext, useContext} from 'react';
+// > This is a child component for Profile.js
+// ? We pass the info into this component and use the info to display it to the user
+import React, {useState, useEffect, useContext} from 'react';
 
 import './SingleProfile.scss'
 import './EditFormSingleProfile.scss'
+
+import ErrorMessage from '../misc/ErrorMessage'
+
 import { useNavigate } from 'react-router-dom';
 import domain from '../../util/domain';
 import UserContext from '../../context/UserContext';
 
-
 const Axios = require('axios')
 
 function SingleProfile({userData}) {
-
     const {getUser, user} = useContext(UserContext)
-    const [bool, setBool] = useState(false)
+
 
     const [edit, setEdit] = useState(false)
     
     const [username, setUsername] = useState(userData.username)
-    const [formUsername, setFormUsername] = useState('')
+    const [formUsername, setFormUsername]   = useState('')
     
+    const [errorMessage, setErrorMessage] = useState(null)
 
     const navigate = useNavigate()
 
     useEffect(()=>{
         setFormUsername(username)
-        console.log(userData)
-        console.log(user)
     }, [])
 
     async function sendEditForm(e){
         e.preventDefault()
+        
         setEdit(false)
 
         const editData = {
@@ -37,18 +40,27 @@ function SingleProfile({userData}) {
             newUsername: formUsername
         }
 
-        // ! No error display for the user and doesn't refresh the page
-        await Axios.put(`${domain}/auth/${username}`, editData)
+        try{
+            await Axios.put(`${domain}/auth/${username}`, editData)
+        }catch(err){
+            if(err.response){
+                setErrorMessage(err.response.data.errorMessage)
+            }
+            return
+        }
+        
         await getUser()
         navigate('/')
-
-        
     }
-    
-    
     
     return  (
         <section className='profile-section'>
+            {errorMessage && (
+                <ErrorMessage
+                    message={errorMessage}
+                    clear={() => setErrorMessage(null)}
+                />
+            )}
             
             <div className='profile-background-area'>
                 <img className='profile-background-img' src={userData.profileBanner} alt='' />
@@ -109,8 +121,7 @@ function SingleProfile({userData}) {
                 </div>                        
             </form>
             }        
-    </section>
-    
+        </section>
     )
 };
 

@@ -1,25 +1,24 @@
+// > Entire sidebar that holds links to other parts of the site
+// ? Profile/Blackboard is limited if the user is not logged in
 import Axios from 'axios'
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import {useNavigate} from 'react-router'
-import {Link, Navigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import UserContext from '../../context/UserContext'
 
-
 import domain from '../../util/domain'
-import Register from '../auth/Register'
 
 import './Sidebar.scss'
 
-import {BsTwitter, BsBell, BsEnvelopeOpen, BsPersonFill, BsPerson} from 'react-icons/bs'
+import {BsPerson} from 'react-icons/bs'
 import {FaHome} from 'react-icons/fa'
-import {HiOutlineHashtag} from 'react-icons/hi'
 import {GiBlackBook} from 'react-icons/gi'
 
-import BBIcon from '../../images/BB_Icon.png'
 
 function Sidebar(){
     const navigate = useNavigate()    
     const {user, getUser} = useContext(UserContext)
+
 
     async function logout(){
         await Axios.get(`${domain}/auth/logout`)
@@ -29,11 +28,9 @@ function Sidebar(){
     
     return (
         <div className='entire-sidebar'>
-            
             <div className='sidebar-interactive'>
-                
                 <section className='icons'>
-                    {/* You can click on the home button to go back to --> '/' */}
+                    
                     <div className="home-btn">
                         <Link to='/' className='home-link' style={{
                             display: 'flex',
@@ -45,113 +42,120 @@ function Sidebar(){
                         </Link> 
                     </div>
 
-                    {/* The user wants to click on the profile button but if */}
-                    {/* They are not logged in, redirect them to register */}
+                    
                     <div className="profile-btn">
                         {user === null || user.username === null ? 
                             (
-                            <Link to='register' className='profile-link'
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                color: 'gray'
-                            }}>
+                                <Link to='register' className='profile-link'
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        color: 'gray'
+                                    }}>
+                                    
                                     <BsPerson className='icon'/><span>Profile</span>                            
-                            </Link>
+
+                                </Link>
                             )
                             : 
-                            // ? User is not null nor is user.username is null, meaning it will show them their profile
                             (
                                 <Link to={`/profile/${user.username}`} className='profile-link'
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    color: 'gray'
-                                }}>
-                                    <BsPerson  className='icon'/><span>Profile</span></Link>   
-                        )}
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        color: 'gray'
+                                    }}>
+                                    
+                                    <BsPerson  className='icon'/><span>Profile</span>
+
+                                </Link>
+                            )
+                        }
                     </div>
 
                     <div className='blackboard-btn'>
                         {user === null || user.username === null ?
-                        (
-                            <Link to='register' className='profile-link'
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    color: 'gray'
-                                }}>
-                                <GiBlackBook className='icon'/><span>Blackboard</span>
-                            </Link>
-                        ):(
+                            (
+                                <Link to='register' className='profile-link'
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        color: 'gray'
+                                    }}>
 
-                            <Link to='/blackboard' className='bb-link'
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    color: 'gray'
-                                }}>
-                            <GiBlackBook className='icon'/><span>Blackboard</span>
-                        </Link>
+                                    <GiBlackBook className='icon'/><span>Blackboard</span>
 
-                        )}
-                        
+                                </Link>
+                            )
+                            :
+                            (
+                                <Link to='/blackboard' className='bb-link'
+                                    style={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        color: 'gray'
+                                    }}>
+
+                                    <GiBlackBook className='icon'/><span>Blackboard</span>
+
+                                </Link>
+                            )
+                        }
                     </div>
-    
                 </section>
-                
             </div>
             
             
             <div className='sidebar-authlist'>
-                {user === null || user.username === null? (
-                    <section className='log-in-section'>
-                        
-                        
-                        <Link to='register' className='register' id='regBtn' style={{textDecoration: 'none'}}>
-                            <div className="register-area" id='regBtn'>
-                                <span id='regBtn'>Sign up with email</span>
-                            </div>
-                        </Link>
-                        
+                {user === null || user.username === null ? 
+                    (
+                        <section className='log-in-section'>
+                            
+                            <Link to='register' className='register' id='regBtn' style={{textDecoration: 'none'}}>
+                                <div className="register-area" id='regBtn'>
+                                    <span id='regBtn'>Sign up with email</span>
+                                </div>
+                            </Link>
 
+                            <Link to='login' className='login' style={{textDecoration: 'none'}}>
+                                <div className="login-area">
+                                    <span>Sign in</span>
+                                </div>            
+                            </Link>    
 
-                        <Link to='login' className='login' style={{textDecoration: 'none'}}>
-                            <div className="login-area">
-                                <span>Sign in</span>
-                            </div>            
-                        </Link>    
-                    </section>
+                        </section>
                     
-                ):(
-                    <section className="log-out-section">
-                        {user && 
+                    )
+                    :
+                    (
+                        <section className="log-out-section">
+                            
                             <div className="mini-user-area">
                                 
                                 <div className="mini-pfp">
                                     <img src={user.profilePicture} alt="" />
                                 </div>
 
-
                                 <div className="mini-user-info">
                                     <div className="username-section">
                                         <span className='logout-username'>@{user.username}</span>
                                     </div>
+
                                     <div className="mini-logout">
                                         <button className='btn-logout' onClick={logout}>
                                             <p>Log out</p>
                                         </button>    
                                     </div>
+                                    
                                 </div>
                                 
                             </div>   
-                        }
-                    </section>
-                    
-                    
-                )}
-            </div>
+                            
+                        </section>
 
+                    )
+                }
+            </div>
         </div>
     )
 }

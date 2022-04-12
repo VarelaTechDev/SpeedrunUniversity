@@ -5,8 +5,8 @@ import './Blackboard.scss'
 import UserContext from '../../context/UserContext'
 import { Link } from 'react-router-dom'
 
+import ClassDisplay from './display/ClassDisplay';
 
-import StudentModule from './StudentModule'
 
 function Blackboard() {
   
@@ -27,7 +27,7 @@ function Blackboard() {
         :
           (
             <>
-              {user.semesterOne === undefined ? 
+              {user.courses === undefined ? 
                 (
                   <>
                     <Link to='/classRegister'>Please register for a class</Link>
@@ -35,10 +35,9 @@ function Blackboard() {
                 ) : 
                 (
                   <>
+                    {console.log(user.courses)}
+                    <ClassDisplay/> 
                     <Link to='/classRegister'>Register for more!</Link>
-                    {console.log('SUS')}
-                    {console.log(user)}
-                    {/* <StudentModule userData={user}/> */}
                   </>
                 )
               }

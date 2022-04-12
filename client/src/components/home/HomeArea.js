@@ -1,9 +1,9 @@
-// > This will be our home page and hold everything together
+// > <Route exact path='/' element={<HomeArea/>}/>
 import React, {useState, useEffect, useContext} from "react";
 
 import Header from './Header'
 
-import './WebArea.scss'
+import './HomeAreaHeader.scss'
 
 function Home(){
     return(
