@@ -35,8 +35,7 @@ function Blackboard() {
                 ) : 
                 (
                   <>
-                    {console.log(user.courses)}
-                    <ClassDisplay/> 
+                    <ClassDisplay user={user.username}/> 
                     <Link to='/classRegister'>Register for more!</Link>
                   </>
                 )

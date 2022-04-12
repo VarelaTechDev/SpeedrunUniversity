@@ -217,10 +217,29 @@ router.get('/:username', async(req, res) => {
 
 // GO HERE WHEN WE CLICK ON A COURSE LINK
 router.get('/courses/:username/:courseId', async(req, res) => {
+    const{username, courseId} = req.params
 
+    if(!username){return res.status(401).json({errorMessage: 'No username detected'})}
+    if(!courseId){return res.status(401).json({errorMessage: 'No courseId detected'})}
+
+    // We want to get just the course ID
+    const courseData = await Classes.findOne({courseId})
+    // return res.json(courseData._id)
+
+    const existingUser = await Student.findOne({username}).populate({
+        path: 'courses',
+        select: ['ClassId', 'Material']
+    })
+    
+    const data = existingUser.courses
+    return res.json(
+        data.find(
+            x => x.ClassId == courseId
+        )
+    )
 })
 
-// USE THIS TO GET DATA ABOUT THE USER AND PARSE IT TO A READABLE FORMAT
+// USE THIS TO GET DATA ABOUT THE USER AND PARSE IT TO A READABLE
 router.get('/courses/:username', async(req, res) => {
     try{
         const {username} = req.params

@@ -1,7 +1,7 @@
 @import '../../../style/breakpoints.scss';
 @import '../../../style/mixins.scss';
 
-.class{
+.student-module{
     position: absolute;
     top: 0; 
     right: 0;
@@ -17,5 +17,18 @@
     
     bottom: 0;
     height: 100vh;
-    
+    margin: 0 1rem 0 1rem;
+    h3{
+        font-size: 0.9rem;
+    }
+    h4{
+        margin-top: .5em;
+        font-weight: 200;
+        text-decoration: underline;
+    }
+    button{
+        @include btn();   
+        background-color: aqua;
+        margin: 1em 0 2em 0;
+    }
 }

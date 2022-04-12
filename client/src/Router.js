@@ -13,6 +13,8 @@ import Profile from "./components/sidebar/Profile";
 import Blackboard from './components/blackboard/Blackboard'
 import ClassRegister from "./components/blackboard/register/ClassRegister";
 
+import StudentModule from './components/blackboard/courseModule/StudentModule';
+
 // ? We can use <Link/> anywhere in the app to redirect to a URL and call the propert COMPONENT
 function RouterPage() {
     return  (
@@ -30,6 +32,8 @@ function RouterPage() {
 
                 <Route path='/blackboard' element={<Blackboard/>}/>
                 <Route path='/classRegister' element={<ClassRegister/>}/>
+
+                <Route path='/courses/:ClassId' element={<StudentModule/>}/>
 
             </Routes>            
         </Router>
