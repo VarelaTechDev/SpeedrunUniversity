@@ -12,7 +12,17 @@ function Header() {
         </div>
 
         <div className='campus_text'>
-            <b>Disabled Accounts for Non-Continuing Students</b>
+            <b>TODO</b>
+            <ul>
+              <li><strike>Fix database model and refactor code</strike></li>
+              <li><strike>Use a database instead of hardcoded value</strike></li>
+              <li><strike>Build a simple quiz</strike></li>
+              <li>Implement quiz submission</li>
+              <li>Clean up profile section</li>
+              <li>implement a simple algorithm</li>
+            </ul>
+            
+            <b className='space'>Disabled Accounts for Non-Continuing Students</b>
             <p>
             The University began to de-commission CSUDH Student network and toroMail accounts of students who have not been enrolled in the 
             campus or graduated for more than two (2) years, have no active application with the University, 

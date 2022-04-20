@@ -16,7 +16,7 @@ const seedDB = async() => {
     // * Empty the database when we run the method
     await Student.deleteMany({})
         
-    for(let i = 0; i < 2; i++){
+    for(let i = 0; i < name.length; i++){
         const salt = await bycrypt.genSaltSync(10)
         // * Hash the password using bycrypt
         const passwordHash = await bycrypt.hashSync("Password1", salt)

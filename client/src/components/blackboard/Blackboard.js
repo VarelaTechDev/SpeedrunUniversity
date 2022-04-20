@@ -36,7 +36,6 @@ function Blackboard() {
                 (
                   <>
                     <ClassDisplay user={user.username}/> 
-                    <Link to='/classRegister'>Register for more!</Link>
                   </>
                 )
               }

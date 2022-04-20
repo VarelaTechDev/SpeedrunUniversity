@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {id, name, professor, material, intro} = require('./classInfo')
+const {id, name, professor, material, intro, tags} = require('./classInfo')
 
 const Class = require('../models/classModel')
 
@@ -15,8 +15,10 @@ const seedDB = async() => {
     // * Empty the database when we run the method
     await Class.deleteMany({})
         
+    // Learning Java with Projects
     const programmingClass = new Class({
         ClassId: id[0],
+        Tag: tags[0],
         Name: name[0],
         Professor: professor[0],
         ClassIntro: intro[0],
@@ -34,16 +36,19 @@ const seedDB = async() => {
                 answerThree: material[3][1],
             }
         },
-        Grade: '',
+        Grade: 0,
     })
     
+    // Calculus I
     const mathClass = new Class({
         ClassId: id[1],
+        Tag: tags[1],
         Name: name[1],
         Professor: professor[1],
         ClassIntro: intro[1],
         Material: {
             chapterOne: {
+                completedQuiz: false,
                 reading: material[4],
 
                 questionOne: material[5][0],
@@ -56,11 +61,37 @@ const seedDB = async() => {
                 answerThree: material[7][1],
             }
         },
-        Grade: '',
+        Grade: 0,
+    })
+
+    // Art 101
+    const artClass = new Class({
+        ClassId: id[2],
+        Tag: tags[2],
+        Name: name[2],
+        Professor: professor[2],
+        ClassIntro: intro[2],
+        Material: {
+            chapterOne: {
+                completedQuiz: false,
+                reading: material[8],
+
+                questionOne: material[9][0],
+                answerOne: material[9][1],
+
+                questionTwo: material[10][0],
+                answerTwo: material[10][1],
+
+                questionThree: material[11][0],
+                answerThree: material[11][1],
+            }
+        },
+        Grade: 0,
     })
 
     await programmingClass.save()
     await mathClass.save()
+    await artClass.save()
 
 }
 

@@ -2,20 +2,21 @@
 @import '../../../style/mixins.scss';
 
 .class{
-    position: absolute;
-    top: 0; 
-    right: 0;
-    @include sm(){
-        left: 9%; 
-    }
-    @include md(){
-        left: 14%; 
-    }
-    @include lg(){
-        left: 17%; 
-    }
+    .info{
+        
+        margin: 0.5em 0 0.5em 0.8em;
+        .tag{
+            color: gray;
+            font-size: 0.95em;
+        }
     
-    bottom: 0;
-    height: 100vh;
-    
+        .name{
+            color: black;
+            font-size: 1.2em;
+            margin-bottom: 0.2em;
+        }
+        .prof{
+            margin: 0.2em 0 0.2em 0;
+        }
+    }
 }

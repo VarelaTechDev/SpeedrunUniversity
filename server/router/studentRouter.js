@@ -207,7 +207,7 @@ router.get('/:username', async(req, res) => {
             .populate({
                 path: 'courses',
                 //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
-                select:['ClassId', 'Name', 'Professor', 'Material']
+                select:['ClassId', 'Name', 'Professor', 'Material', 'Tag']
             })
         )
     }catch(err){
@@ -228,7 +228,7 @@ router.get('/courses/:username/:courseId', async(req, res) => {
 
     const existingUser = await Student.findOne({username}).populate({
         path: 'courses',
-        select: ['ClassId', 'Material']
+        select: ['ClassId', 'Material', 'Grade']
     })
     
     const data = existingUser.courses
@@ -255,9 +255,42 @@ router.get('/courses/:username', async(req, res) => {
             .populate({
                 path: 'courses',
                 //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
-                select:['ClassId', 'Name', 'Professor', 'Material']
+                select:['ClassId', 'Name', 'Professor', 'Material', 'Grade', 'Tag']
             })
         )
+    }catch(err){
+        return res.json(500).send()
+    }
+
+})
+
+// ! THIS WILL SET WHAT WE GIVE IT TO THAT VALUE :: IF WE HAVE MULTIPLE QUIZZES THIS COULD OVERRIDE PREVIOUS PROGRESS
+// ? After calculating the grade based off the quiz, we want to set their current grade
+router.put('/courses/:username/:courseId/:grade', async(req, res) => {
+    try{
+        const {username, courseId, grade} = req.params
+
+        if(!username){return res.status(401).json({errorMessage: 'No username detected'})}
+
+        const existingUser = await Student.findOne({username}).populate({
+            path: 'courses',
+            select: ['ClassId', 'Material', 'Grade']
+        })
+
+        // Place the user courses here
+        const data = existingUser.courses
+        
+        // ? We only want to manipulate data for one course
+        const findCourse = existingUser.courses.find(
+            x => x.ClassId == courseId
+        )
+        
+        findCourse.Grade = grade
+
+        await findCourse.save()
+
+        return res.json(findCourse)
+
     }catch(err){
         return res.json(500).send()
     }

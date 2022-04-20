@@ -64,6 +64,7 @@ function Register(){
             )}
 
             <form className='form-regLog' onSubmit={register}>
+                
                 <div className="line-up">
                     <label htmlFor="form-email">Name:</label>
                     <input 

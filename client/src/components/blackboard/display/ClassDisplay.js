@@ -23,18 +23,7 @@ function ClassDisplay({user}) {
         getClassResponse()
             .catch(console.log)
     }, [])
-
-    function RunTheRender(){
-        console.log('TEST')
-        console.log(userDataWithClasses)
         
-        // return (<ClassRender/>)
-        return (
-            userDataWithClasses.map((list, i) => {
-                return <ClassRender key={i} classData={list}/>
-            })
-        )
-    }
 
     return (
         <div className='class'>
@@ -48,9 +37,18 @@ function ClassDisplay({user}) {
             : 
                 (
                     <>
-                        <h1>Finished</h1>
-                        {RunTheRender()}
-                        
+                            <h1 className='classDisplayHeader'>Courses</h1>
+                            {userDataWithClasses.map((list, i) => {
+                                return <ClassRender key={i} classData={list}/>
+                            })  }
+                            <Link to='/classRegister' className='link-style' style={{
+                                color: 'black',
+                                marginLeft: '0.8em'
+                                
+                            }}
+                            >
+                                Register for more!
+                            </Link>
                     </>
                     
                 )

@@ -11,18 +11,25 @@ import { useParams } from "react-router-dom";
 
 import './StudentModule.scss'
 
+import {getGrade} from './calculateGrade'
+
+import { useNavigate } from 'react-router'
+
 function StudentModule() {
     const{ClassId} = useParams()
+
     const [loading, setLoading] = useState(true)
     const {getUser, user} = useContext(UserContext)
+
+    const navigate = useNavigate()
+
     const [classData, setClassData] = useState()
     
-    // ! WE NEED THIS FOR OUR FORMS :: ADD LATER TO THE PROJECT
-    // const [formName, setFormName] = useState('')
-    // const [formEmail, setFormEmail] = useState('')
-    // const [formUsername, setFormUsername] = useState('')
-    // const [formPassword, setFormPassword] = useState('')
-    // const [formPasswordVerify, setFormPasswordVerify] = useState('')
+    const [questionOneAnswer, setQuestionOneAnswer] = useState('')
+    const [questionTwoAnswer, setQuestionTwoAnswer] = useState('')
+    // const [questionThreeAnswer, setQuestionThreeAnswer] = useState('')
+    
+    const [isQuizCompleted, setIsQuizCompleted] = useState(true)
 
     useEffect(()=>{
         console.log(loading)
@@ -40,68 +47,81 @@ function StudentModule() {
 
             getPopulatedUserInfo()
                 .then(setLoading(false))
-                .then(console.log(classData))
                 .catch(console.error);;
         }
     },[user])
 
-    function getDisplay(){
-        console.log("HELLO WORLD")
-    }
-    
 
     async function submitQuiz(e){
         e.preventDefault()
+        console.log(ClassId)
+        await getGrade(user, ClassId, questionOneAnswer, questionTwoAnswer)
+        navigate(`/blackboard`)
+
+        
+
     }
 
     return  (
         <div className="student-module">
             <div className='displayUserClasses'>
-                {/* {user == null ?  */}
                 {loading == true || classData == undefined? 
-                (
-                    <>
-                        <h1>Loading</h1>
-                    </>    
-                )
+                    (
+                        <>
+                            <h1>Loading</h1>
+                        </>    
+                    )
                 :
-                (
-                    <>
-                        <h3>{classData.chapterOne.reading}</h3>
-                        <h4>Quiz</h4>
-                        
-                        
-                        <form className='form-quiz' onSubmit={submitQuiz}>
-                            <div className='questionOne'>
-                                <p>1) {classData.chapterOne.questionOne}</p>
-                                <input type="radio" value="male" id="male" name="gender" />            
-                                <label for="male">3x</label>
-                                <br/>
-                                <input type="radio" value="female" id="female" name="gender"/>            
-                                <label for="female">{classData.chapterOne.answerOne}</label>
-                            </div>
-                            
-                            <div className='questionTwo'>
-                                <p>2) {classData.chapterOne.questionTwo}</p>
-                                <input type="radio" value="male" id="male" name="gender" />            
-                                <label for="male">3x</label>
-                                <br/>
-                                <input type="radio" value="female" id="female" name="gender"/>            
-                                <label for="female">{classData.chapterOne.answerTwo}</label>
-                            </div>
+                    (
+                        classData.chapterOne.completedQuiz == true ?
+                        // classData.chapterOne.completedQuiz == true ?
+                            (
+                                <>
+                                    <h1>Loading</h1>
+                                </>
+                            )
+                        :
+                            (
+                                <>
+                                    {/* {console.log(classData)}
+                                    {console.log(user)} */}
+                                    <h3>{classData.chapterOne.reading}</h3>
+                                    <h4>Quiz</h4>
+                                    
+                                    {/* ! GIVE THEM THE SAME NAME TO PREVENT DOUBLEW CLICKING!!! */}
+                                    <form className='form-quiz' onSubmit={submitQuiz}>
+                                        
+                                        <div className='questionOne'>
+                                            <p>1) {classData.chapterOne.questionOne}</p>
+                                            
+                                            <input type="radio" value='WRONG' id="qOneOne" name="qOne" onClick={(e) => setQuestionOneAnswer(e.target.value)}/>            
+                                            <label htmlFor="qOneOne">3x</label>
 
-                            <div className='questionThree'>
-                                <p>2) {classData.chapterOne.questionThree}</p>
-                                <input type="radio" value="male" id="male" name="gender" />            
-                                <label for="male">3x</label>
-                                <br/>
-                                <input type="radio" value="female" id="female" name="gender"/>            
-                                <label for="female">{classData.chapterOne.answerThree}</label>
-                            </div>
-                            <button className='btn-submit' type='submit'>Submit</button>
-                        </form>
-                    </>
-                )}
+                                            <br/>
+                                            
+                                            <input type="radio" value={classData.chapterOne.answerOne} id="qOneTwo" name="qOne" onClick={(e) => setQuestionOneAnswer(e.target.value)}/>            
+                                            <label htmlFor={classData.chapterOne.answerOne}>{classData.chapterOne.answerOne}</label>
+
+                                        </div>
+                                        
+                                        <div className='questionTwo'>
+                                            <p>2) {classData.chapterOne.questionTwo}</p>
+                                            
+                                            <input type="radio" value="WRONG" id="qTwoOne" name="gTwo" onClick={(e) => setQuestionTwoAnswer(e.target.value)} />            
+                                            <label htmlFor="qTwoOne">3x</label>
+                                            
+                                            <br/>
+                                            
+                                            <input type="radio" value={classData.chapterOne.answerTwo} id="qTwoTwo" name="gTwo" onClick={(e) => setQuestionTwoAnswer(e.target.value)}/>            
+                                            <label htmlFor="qTwoTwo">{classData.chapterOne.answerTwo}</label>
+                                        </div>
+
+                                        <button className='btn-submit' type='submit'>Submit</button>
+                                    </form>
+                                </>
+                            )
+                    )
+                }
             </div>
         </div>
     )

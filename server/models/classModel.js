@@ -4,10 +4,12 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const classSchema = new mongoose.Schema(
     {
         ClassId: {type: String, },
+        Tag: {type: String},
         Name: {type: String, },
         Professor: {type: String, },
         Material: {
             chapterOne: {
+                completedQuiz: {type: Boolean},
                 reading: {type: String, },
                 
                 questionOne: {type: String, },
@@ -20,7 +22,7 @@ const classSchema = new mongoose.Schema(
                 answerThree: {type: String, },
             }
         },
-        Grade: {type: String, },
+        Grade: {type: Number, },
     }
 )
 
