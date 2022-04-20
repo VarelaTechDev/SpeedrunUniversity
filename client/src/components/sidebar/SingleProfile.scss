@@ -75,9 +75,24 @@
             margin-left: 2em ;
             height: auto;
             background-color: white;
+
+            
             p{
-                
+                margin: 0.5em 0 0.5em 0;
+                padding: 2em 0 2em 0;
+                border: 1px solid black;
+                width: 95%;
             }
+            p:last-child{
+                margin: 0.5em 0 0 0;
+            }
+        }
+
+        .report-card{
+            margin-top: 2em;
+            margin-left: 2em ;
+            height: auto;
+            background-color: white;
         }
 
         .follow-following-section{
@@ -105,8 +120,29 @@
             background-color: #FFF;
             
             .top-of-box{
+                color: black;
+                font-size: 2em;
+                
+                .x{
+                    font-weight: bold;
+                }
+
+                .btn-submit{
+                    color: white;
+                    font-size: 0.7em;
+                    background-color: black;
+                    padding: 0.4em 0.8em 0.4em 0.8em;
+                    border-radius: 1em;
+
+                }
+
+                p{
+                    font-weight: bold;
+                }
+
                 display: flex;
                 justify-content: space-between;
+                
                 span{
                     font-weight: bold;
                 }
@@ -114,18 +150,20 @@
         }
 
         .edit-form-display{
+            .edit-username{
+                @include editSpanStyle();
+            }
 
+            .edit-pfp{
+                @include editSpanStyle();
+            }
 
-            .edit-username-field{
+            .edit-banner{
+                @include editSpanStyle();
+            }
 
-                .header{
-                    font-weight: bold;
-                    text-decoration: underline;
-                    margin-right: 0.3em;
-                }
-                #form-username{
-                    border: 1px solid black;
-                }
+            .edit-pronouns{
+                @include editSpanStyle();
             }
         }
 

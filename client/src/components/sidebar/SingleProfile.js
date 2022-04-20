@@ -1,3 +1,4 @@
+// TODO: Fix the router when you send updated data to the server and add the hooks, fix the regist page, and etc
 // > This is a child component for Profile.js
 // ? We pass the info into this component and use the info to display it to the user
 import React, {useState, useEffect, useContext} from 'react';
@@ -79,36 +80,36 @@ function SingleProfile({userData}) {
             <div className='profile-info-section'>
                 <div className="profile-name">
                     <span className='name'>{userData.username}</span>
-                    <span>@{userData.username}</span>
                 </div>
 
                 <div className='profile-text-section'>
-                    <p>Joined [Find the data later]</p>
+                    <h1>Basic Info</h1>
+                    <p>Full Name</p>
+                    <p>Email Address</p>
+                    <p>Pronouns</p>
                 </div>
                 
-                <div className='follow-following-section'>
-                    <p></p>
+                <div className='report-card'>
+                    <h1>Report Card</h1>
+                    
                 </div>
-            </div>
-
-            
-
-            
-
-            <div className='display-tweets-section'>
 
             </div>
             
             {!edit ? <></> : 
             <form className='edit-form' onSubmit={sendEditForm}>
                 <div className="edit-box">
+                    
                     <div className="top-of-box">    
-                        <button onClick={()=>{setEdit(false)}}>X</button>
+                        <button className='x' onClick={()=>{setEdit(false)}}>X</button>
                         <p>Edit Profile</p>
                         <button className='btn-submit' type='submit'>Save</button>
                     </div>                        
+                    
+                    {/* EDIT FORM */}
                     <div className="edit-form-display">
-                        <div className="edit-username-field">
+                        
+                        <div className="edit-username">
                             <label className='header' htmlFor="form-username">Username: </label>    
                             <input 
                                 id='form-username'
@@ -117,6 +118,37 @@ function SingleProfile({userData}) {
                                 onChange={(e)=> setFormUsername(e.target.value)}
                             />
                         </div>
+
+                        <div className="edit-pfp">
+                            <label className='header' htmlFor="form-username">Profile Picture: </label>    
+                            <input 
+                                id='form-username'
+                                type="text" 
+                                value={formUsername}
+                                onChange={(e)=> setFormUsername(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="edit-banner">
+                            <label className='header' htmlFor="form-username">Profile Banner: </label>    
+                            <input 
+                                id='form-username'
+                                type="text" 
+                                value="bannerLink"
+                                onChange={(e)=> setFormUsername(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="edit-pronouns">
+                            <label className='header' htmlFor="form-username">Pronouns: </label>    
+                            <input 
+                                id='form-username'
+                                type="text" 
+                                value="He/She"
+                                onChange={(e)=> setFormUsername(e.target.value)}
+                            />
+                        </div>
+
                     </div>
                 </div>                        
             </form>
