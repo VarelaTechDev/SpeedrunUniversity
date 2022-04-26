@@ -39,12 +39,8 @@ function ClassDisplay({user}) {
                     <> 
                             {userDataWithClasses.length == 0 ?
                                 (
-                                    <div className='no-courses'>
-                                        <Link to='/classRegister' className='link-style' style={{
-                                            color: 'black',
-                                            marginLeft: '0.8em',
-                                        }}
-                                        >
+                                    <div className='noCourses'>
+                                        <Link to='/classRegister' className='link-style-solo'>
                                             Register for some courses now!
                                         </Link>
                                     </div>
@@ -56,11 +52,14 @@ function ClassDisplay({user}) {
                                             return <ClassRender key={i} classData={list}/>
                                         })  }
                                         
-                                        <Link to='/classRegister' className='link-style' style={{
+                                        {/* <Link to='/classRegister' className='link-style' style={{
                                             color: 'black',
-                                            marginLeft: '0.8em'
+                                            marginLeft: '1.5em'
                                         }}
                                         >
+                                            Register for more courses!
+                                        </Link> */}
+                                        <Link to='/classRegister' className='link-style'>
                                             Register for more courses!
                                         </Link>
                                     </>

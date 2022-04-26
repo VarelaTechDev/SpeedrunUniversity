@@ -16,4 +16,36 @@
     //     text-decoration: underline;
         
     // }
+    .link-style{
+        color: black;
+        margin-left: 2%;
+        font-size: 2em
+    }
+
+    .noCourses{
+        //background-color: #C0DEED;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        .link-style-solo{
+            border: 1px solid black;
+            
+            background: #1DCAFF;
+            color: #FFF;
+            
+            padding: 1em;
+            border-radius: 2em;
+            
+            margin-left: 2%;
+            font-size: 2em;
+            transition: color ease-in 0.1s, background-color ease-in 0.1s;
+            &:hover{
+                text-decoration: none;
+                color: #331800;
+                background-color: #FF4705;
+            }
+        }
+    }
 }
