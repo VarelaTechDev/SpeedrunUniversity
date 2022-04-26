@@ -9,7 +9,7 @@ import domain from '../../../util/domain'
 
 import './DisplayModule.scss'
 
-function DisplayModule({ClassId, Name, Professor, UserData}) {
+function DisplayModule({ClassId, Name, Professor, Tag, Synopsis, UserData}) {
     
     const [errorMessage, setErrorMessage] = useState(null)
 
@@ -46,25 +46,29 @@ function DisplayModule({ClassId, Name, Professor, UserData}) {
 
 
     return  (
-        // <div className="class">
-        <form className='class' onSubmit={applyForClass}>
-            <div className='classInfo'>
-                <p>{UserData.username}</p>
-                <p>Course Id: {ClassId}</p>
-                <p>ClassName: {Name}</p>
-                <p>{Professor}</p>
+        <form onSubmit={applyForClass}>
+            <div className='classDesign'>
+                
+                <div className='classHeader'>
+                    <span>{Name}</span>
+                </div>
+                
+                <div className='classInfo'>
+                    <span>{Tag} {ClassId}</span>
+                    <span>Professor: {Professor}</span>
+                    <span className='spanTag'>{Synopsis}</span>
+                </div>
+
+                <div className='registerButton'>
+                    <button 
+                        className='btn-submit' 
+                        type='submit'
+                    >
+                        Click to Apply
+                    </button>
+                </div>
+
             </div>
-            
-            <div className='misc'>
-                <button 
-                    className='btn-submit' 
-                    type='submit'
-                >
-                    Click to Apply
-                </button>
-            </div>
-            
-        {/* </div> */}
         </form>
     )
 };

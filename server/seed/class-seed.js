@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {id, name, professor, material, intro, tags} = require('./classInfo')
+const {id, name, professor, material, intro, tags, synopsis} = require('./classInfo')
 
 const Class = require('../models/classModel')
 
@@ -21,6 +21,8 @@ const seedDB = async() => {
         Tag: tags[0],
         Name: name[0],
         Professor: professor[0],
+        CompletedQuiz: false,
+        Synopsis: synopsis[0],
         ClassIntro: intro[0],
         Material: {
             chapterOne: {
@@ -45,6 +47,8 @@ const seedDB = async() => {
         Tag: tags[1],
         Name: name[1],
         Professor: professor[1],
+        CompletedQuiz: false,
+        Synopsis: synopsis[1],
         ClassIntro: intro[1],
         Material: {
             chapterOne: {
@@ -70,6 +74,8 @@ const seedDB = async() => {
         Tag: tags[2],
         Name: name[2],
         Professor: professor[2],
+        CompletedQuiz: false,
+        Synopsis: synopsis[2],
         ClassIntro: intro[2],
         Material: {
             chapterOne: {

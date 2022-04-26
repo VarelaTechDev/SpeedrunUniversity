@@ -20,15 +20,30 @@ function SingleProfile({userData}) {
 
     const [edit, setEdit] = useState(false)
     
+    // TODO: Need to add pronouns and profile banner when you register and edit register routes
     const [username, setUsername] = useState(userData.username)
-    const [formUsername, setFormUsername]   = useState('')
+    const [profilePicture, setProfilePicture] = useState(userData.profilePicture)
+    const [profileBanner, setProfileBanner] = useState(userData.profileBanner)
+    const[pronouns, setPronouns] = useState(userData.pronouns)
     
+    const [formUsername, setFormUsername]   = useState('')
+    const [formProfilePicture, setFormProfilePicture] = useState('')
+    const [formProfileBanner, setFormProfileBanner] = useState('')
+    const [formPronouns, setFormPronouns] = useState('')
+
+
+
     const [errorMessage, setErrorMessage] = useState(null)
 
     const navigate = useNavigate()
 
     useEffect(()=>{
+        getUser()
+        
         setFormUsername(username)
+        setFormProfilePicture(profilePicture)
+        setFormProfileBanner(profileBanner)
+        setFormPronouns(pronouns)
     }, [])
 
     async function sendEditForm(e){
@@ -38,7 +53,17 @@ function SingleProfile({userData}) {
 
         const editData = {
             originalUsername: username,
-            newUsername: formUsername
+            newUsername: formUsername,
+
+            originalPFP: profilePicture,
+            newPFP: formProfilePicture,
+
+            oldBanner: profileBanner,
+            newBanner: formProfileBanner,
+
+            oldPronouns: pronouns,
+            newPronouns: formPronouns,
+
         }
 
         try{
@@ -69,11 +94,14 @@ function SingleProfile({userData}) {
 
             <div className='profile-picture-section'>
                 <img className='profile-picture' src={userData.profilePicture} alt='' />
+                
+                
                 {user && (
                     userData.username === user.username && (
                         <button className='edit-button' onClick={()=>{setEdit(true)}}>Edit profile</button>
                     )
                 )}
+                
             </div>
 
 
@@ -82,11 +110,12 @@ function SingleProfile({userData}) {
                     <span className='name'>{userData.username}</span>
                 </div>
 
+{/* background-color:#fffafa; */}
                 <div className='profile-text-section'>
                     <h1>Basic Info</h1>
-                    <p>Full Name</p>
-                    <p>Email Address</p>
-                    <p>Pronouns</p>
+                    <span className='infoTitle'>Full Name:</span><span className='info'>{userData.name}</span><br></br>
+                    <span className='infoTitle'>Email Address:</span> <span className='info'>{userData.email}</span><br></br>
+                    <span className='infoTitle'>Pronouns:</span> <span className='info'>{userData.pronouns}</span>
                 </div>
                 
                 <div className='report-card'>
@@ -120,32 +149,32 @@ function SingleProfile({userData}) {
                         </div>
 
                         <div className="edit-pfp">
-                            <label className='header' htmlFor="form-username">Profile Picture: </label>    
+                            <label className='header' htmlFor="form-pfp">Profile Picture: </label>    
                             <input 
-                                id='form-username'
+                                id='form-pfp'
                                 type="text" 
-                                value={formUsername}
-                                onChange={(e)=> setFormUsername(e.target.value)}
+                                value={formProfilePicture}
+                                onChange={(e)=> setFormProfilePicture(e.target.value)}
                             />
                         </div>
 
                         <div className="edit-banner">
-                            <label className='header' htmlFor="form-username">Profile Banner: </label>    
+                            <label className='header' htmlFor="form-banner">Profile Banner: </label>    
                             <input 
-                                id='form-username'
+                                id='form-banner'
                                 type="text" 
-                                value="bannerLink"
-                                onChange={(e)=> setFormUsername(e.target.value)}
+                                value={formProfileBanner}
+                                onChange={(e)=> setFormProfileBanner(e.target.value)}
                             />
                         </div>
 
                         <div className="edit-pronouns">
-                            <label className='header' htmlFor="form-username">Pronouns: </label>    
+                            <label className='header' htmlFor="form-pronouns">Pronouns: </label>    
                             <input 
-                                id='form-username'
+                                id='form-pronouns'
                                 type="text" 
-                                value="He/She"
-                                onChange={(e)=> setFormUsername(e.target.value)}
+                                value={formPronouns}
+                                onChange={(e)=> setPronouns(e.target.value)}
                             />
                         </div>
 

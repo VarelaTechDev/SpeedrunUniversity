@@ -1,10 +1,16 @@
 @import '../../../style/breakpoints.scss';
 @import '../../../style/mixins.scss';
 
-.class{
+.classRender{
+    
     .info{
-        
-        margin: 0.5em 0 0.5em 0.8em;
+        margin: 0.5em 0 1em 0.8em;
+        border: 1px solid black;
+        width: 97%;
+        border-left: 0.5em solid #ff79f4;
+        padding: 0.5em 0 0.5em 1em;
+
+
         .tag{
             color: gray;
             font-size: 0.95em;

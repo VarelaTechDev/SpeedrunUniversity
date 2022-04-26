@@ -27,6 +27,12 @@ module.exports.intro = [
     'Calculus is a branch of mathematics that involves the study of rates of change. Before calculus was invented, all math was static: It could only help calculate objects that were perfectly still. But the universe is constantly moving and changing.',
 ]
 
+module.exports.synopsis = [
+    'Java is a popular programming language, created in 1995. It is owned by Oracle, and more than 3 billion devices run Java.',
+    'Calculus is concerned with comparing quantities which vary in a non-linear way. It is used extensively in science and engineering since many of the things we are studying (like velocity, acceleration, current in a circuit) do not behave in a simple, linear fashion. If quantities are continually changing, we need calculus to study what is going on.',
+    'Introduction to Art: Design, Context, and Meaning offers a comprehensive introduction to the world of Art',
+]
+
 module.exports.material = [
     
     // Java

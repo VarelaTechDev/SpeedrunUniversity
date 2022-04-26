@@ -38,21 +38,16 @@ function ClassRegister() {
     }
 
     return  (
-        <div className="class-form">
+        <div className="class-form-css">
             <p>
-                The following classes are taught at Speedrun University:
+                The following classes are taught at Speedrun University
             </p>
             {klass.length == 0 || user == null? 
                 ('Loading')    
                 :
                 (
-                    //'Look at me'
                     klass.map((item, i) => {
-                        //console.log(item.Name)
-                        // return <p key={i}>{
-                        //     item.Name
-                        // }</p>
-                        return <DisplayModule key={i} ClassId={item.ClassId} Name={item.Name} Professor={item.Professor} UserData={user}/>
+                        return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
                     })
                     
                 )

@@ -8,6 +8,7 @@ const studentSchema = new mongoose.Schema({
     username: {type: String, },
     profilePicture: {type: String, },
     profileBanner: {type: String, },
+    pronouns: {type: String, },
     passwordHash:{type: String, },
     courses: [{
         type: ObjectId,

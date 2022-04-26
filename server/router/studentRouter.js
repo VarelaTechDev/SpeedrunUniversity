@@ -14,9 +14,10 @@ const auth = require('../middleware/auth')
 
 // ^ POST request :: User wants to register for an account
 router.post('/register', async(req, res) => {
+    // ! Add pronouns and profile banner!!!
     try{
         // * Destructure data in the JSON form
-        const {name, email, username, profilePicture, password, passwordVerify} = req.body
+        const {name, email, username, profilePicture, profileBanner, pronouns, password, passwordVerify} = req.body
         // * Validation
         if(!name ||!email || !username || !password || !passwordVerify ){return res.status(400).json({errorMessage: 'Please enter all required fields'})}
         if(password.length < 6){return res.status(400).json({errorMessage: "Please enter a password that's at least six characters long" })}
@@ -32,8 +33,9 @@ router.post('/register', async(req, res) => {
             name,
             email,
             username,
-            profileBanner: 'https://res.cloudinary.com/durogtr7u/image/upload/v1641253201/banner_kbfvfr.png',
+            profileBanner,
             profilePicture,
+            pronouns,
             passwordHash
         })
 
@@ -207,7 +209,7 @@ router.get('/:username', async(req, res) => {
             .populate({
                 path: 'courses',
                 //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
-                select:['ClassId', 'Name', 'Professor', 'Material', 'Tag']
+                select:['ClassId', 'Name', 'Professor', 'Material', 'Tag', 'Synopsis']
             })
         )
     }catch(err){
@@ -255,7 +257,7 @@ router.get('/courses/:username', async(req, res) => {
             .populate({
                 path: 'courses',
                 //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
-                select:['ClassId', 'Name', 'Professor', 'Material', 'Grade', 'Tag']
+                select:['ClassId', 'Name', 'Professor', 'Material', 'Grade', 'Tag', 'CompletedQuiz', 'Synopsis']
             })
         )
     }catch(err){
@@ -286,6 +288,8 @@ router.put('/courses/:username/:courseId/:grade', async(req, res) => {
         )
         
         findCourse.Grade = grade
+        // ! For now, we will only have one quiz per class!
+        findCourse.CompletedQuiz = true
 
         await findCourse.save()
 

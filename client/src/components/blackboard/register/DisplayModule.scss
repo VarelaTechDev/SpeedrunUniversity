@@ -1,23 +1,76 @@
 @import '../../../style/breakpoints.scss';
 @import '../../../style/mixins.scss';
 
-.class{
+// ! index.scss f this over
+
+.classDesign{
+    
     display: flex;
-    margin-top: 1rem;
-    padding: 0.2rem;
-    border: 1px black solid;
-    justify-content: space-between;
-    .classInfo{
-        width: 50%;
-        background-color: aqua;
+	flex-direction: column;
+    
+    
+    width: 90%;
+    margin-left: 2.5em;
+	
+    // margin-bottom: 2em;
+    
+    // width: 95%;
+    // margin-left: 2.5%;
+    
+    // padding: 0.2em 0.2em 0.2em 0.2em;
+    
+    
+    // Title of the Class
+    margin-bottom: 2em;
+
+    .classHeader{
+        @include centerContent();
+        
+
+        border-radius: 0.4em 0.4em 0 0;
+        background-color: #186DDD;         
+        color: white;   
+        font-size: 2em;
+        padding: 0.3em 0 0.3em 0;
+        
+        
     }
-    button{
-        margin-right: 0.2em;
-        padding: 0.2em;
-        background-color: red;
-        &:hover{
-            background-color: pink;
-            color: white;
+
+    // Class Info displayed here
+    .classInfo{
+        @include centerContent();
+        
+        background-color: white;
+        height: 5em;
+        padding: 0.1em 0.2em 0.5em 0.2em;
+        font-size: 1.2em;
+        height: auto;
+        .spanTag{
+            padding: 0.5em 0.2em 0.5em 0.2em
         }
     }
+
+    // Button Register
+    .registerButton{
+        @include centerContent();
+        border-radius: 0 0 0.4em 0.4em;
+        background-color: #186DDD;
+        padding: 0.3em;
+        button{
+            
+            
+            padding: 0.2em;
+            
+            color: white;
+
+            transition: background-color 0.1s linear, color 0.1s linear;
+            &:hover{
+                border-radius: 0.2em 0.2em 0.2em 0.2em;
+                background-color: white;
+                color: #186DDD;
+            }
+        }
+    }
+
+
 }

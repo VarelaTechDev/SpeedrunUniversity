@@ -17,8 +17,12 @@ function Register(){
     const [formName, setFormName] = useState('')
     const [formEmail, setFormEmail] = useState('')
     const [formUsername, setFormUsername] = useState('')
+    
+
     const [formPassword, setFormPassword] = useState('')
     const [formPasswordVerify, setFormPasswordVerify] = useState('')
+
+    const [formPronouns, setFormPronouns] = useState('')
 
     const [errorMessage, setErrorMessage] = useState(null)
 
@@ -33,9 +37,11 @@ function Register(){
             name: formName,
             email: formEmail,
             username: formUsername,
-            profilePicture: 'https://i.pinimg.com/originals/d3/e2/68/d3e268778a77cc1df25d03f004956da3.png',
+            profilePicture: 'https://i.pinimg.com/736x/9b/47/a0/9b47a023caf29f113237d61170f34ad9.jpg',
+            profileBanner: 'https://www.thepartnermarketinggroup.com/wp-content/uploads/2018/01/LinkedInDefaultBanner.png',
             password: formPassword,
-            passwordVerify: formPasswordVerify
+            passwordVerify: formPasswordVerify,
+            pronouns: formPronouns,
         }
 
         try{
@@ -92,7 +98,15 @@ function Register(){
                         value={formUsername}
                         onChange={(e)=> setFormUsername(e.target.value)}
                     />
-                
+
+                    <label htmlFor="form-pronouns">Pronouns:</label>
+                    <input 
+                        id='form-pronouns'
+                        type="text" 
+                        value={formPronouns}
+                        onChange={(e)=> setFormPronouns(e.target.value)}
+                    />
+
                     <label htmlFor="form-password">Password:</label>
                     <input 
                         id='form-password'

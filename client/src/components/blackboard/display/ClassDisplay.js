@@ -26,9 +26,9 @@ function ClassDisplay({user}) {
         
 
     return (
-        <div className='class'>
+        <div className='classDisplay'>
             {
-                userDataWithClasses == undefined ? 
+                userDataWithClasses == undefined? 
                 (
                     <>
                         <p>Loading</p>
@@ -36,19 +36,37 @@ function ClassDisplay({user}) {
                 ) 
             : 
                 (
-                    <>
-                            <h1 className='classDisplayHeader'>Courses</h1>
-                            {userDataWithClasses.map((list, i) => {
-                                return <ClassRender key={i} classData={list}/>
-                            })  }
-                            <Link to='/classRegister' className='link-style' style={{
-                                color: 'black',
-                                marginLeft: '0.8em'
-                                
-                            }}
-                            >
-                                Register for more!
-                            </Link>
+                    <> 
+                            {userDataWithClasses.length == 0 ?
+                                (
+                                    <div className='no-courses'>
+                                        <Link to='/classRegister' className='link-style' style={{
+                                            color: 'black',
+                                            marginLeft: '0.8em',
+                                        }}
+                                        >
+                                            Register for some courses now!
+                                        </Link>
+                                    </div>
+                                )
+                                :
+                                (
+                                    <>
+                                        {userDataWithClasses.map((list, i) => {
+                                            return <ClassRender key={i} classData={list}/>
+                                        })  }
+                                        
+                                        <Link to='/classRegister' className='link-style' style={{
+                                            color: 'black',
+                                            marginLeft: '0.8em'
+                                        }}
+                                        >
+                                            Register for more courses!
+                                        </Link>
+                                    </>
+                                )
+                            }
+                            
                     </>
                     
                 )

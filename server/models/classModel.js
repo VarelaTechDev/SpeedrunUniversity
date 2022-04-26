@@ -7,6 +7,8 @@ const classSchema = new mongoose.Schema(
         Tag: {type: String},
         Name: {type: String, },
         Professor: {type: String, },
+        CompletedQuiz: {type: Boolean, },
+        Synopsis: {type: String, },
         Material: {
             chapterOne: {
                 completedQuiz: {type: Boolean},

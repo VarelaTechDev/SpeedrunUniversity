@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const bycrypt = require('bcryptjs')
-const {email, name, username, profilePicture} = require('./studentInfo')
+const {email, name, username, profilePicture, profileBanner, pronouns, aquaInfo} = require('./studentInfo')
 
 const Student = require('../models/studentModel')
 
@@ -20,17 +20,35 @@ const seedDB = async() => {
         const salt = await bycrypt.genSaltSync(10)
         // * Hash the password using bycrypt
         const passwordHash = await bycrypt.hashSync("Password1", salt)
-        
+        const randomPronoun = Math.floor(Math.random() * pronouns.length)
         const student = new Student({
             name: name[i],
             email: email[i],
             username: username[i],
-            profilePicture: profilePicture[i],
+            profilePicture: profilePicture[0],
+            profileBanner: profileBanner[0],
             passwordHash: passwordHash,
+            pronouns: pronouns[randomPronoun]
         })
 
         await student.save()
     }
+
+    // Create the Aqua PFP
+    const salt = await bycrypt.genSaltSync(10)
+    const passwordHash = await bycrypt.hashSync(aquaInfo[6], salt)
+
+        const student = new Student({
+            name: aquaInfo[0],
+            email: aquaInfo[1],
+            username: aquaInfo[2],
+            pronouns: aquaInfo[3],
+            profilePicture: aquaInfo[4],
+            profileBanner: aquaInfo[5],
+            passwordHash: passwordHash,
+        })
+
+        await student.save()
     
 
 }

@@ -1,16 +1,19 @@
 @import '../../../style/breakpoints.scss';
 @import '../../../style/mixins.scss';
 
-.class{
-    margin: 0.5em 1rem 1rem 0.5em;
-    border-left: 5px pink solid;
-    padding: 0.2em 0 0.5em 0.5em;
+.classDisplay{
+    // margin: 0.3em 1rem 1rem 0.3em;
+    
+    // padding: 0.1em 0 0.3em 0.1em;
 
-    display: flex;
-    flex-direction: column;
-    .classDisplayHeader{
-        margin-left: 0.4em;
-        font-size: 2em;
-        text-decoration: underline;
-    }
+    // display: flex;
+    // flex-direction: column;
+    
+
+    // .classDisplayHeader{
+    //     margin-left: 0.4em;
+    //     font-size: 2em;
+    //     text-decoration: underline;
+        
+    // }
 }

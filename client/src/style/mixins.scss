@@ -1,5 +1,11 @@
 // > We cam easily import this
 
+@mixin centerContent(){
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
 @mixin btn(){
     padding: 0.3rem 0.5rem;

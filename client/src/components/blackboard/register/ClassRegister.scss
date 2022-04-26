@@ -1,10 +1,11 @@
 @import '../../../style/breakpoints.scss';
 @import '../../../style/mixins.scss';
 
-.class-form{
+.class-form-css{
     position: absolute;
     top: 0; 
     right: 0;
+    
     @include sm(){
         left: 9%; 
     }
@@ -17,5 +18,21 @@
     
     bottom: 0;
     height: 100vh;
-    
+
+    background-color: gainsboro;
+    p{
+        
+        color: #353839;
+        width: 90%;
+        height: 2em;
+        margin: 0.5em 0 0.5em 2.5rem;
+        
+        text-decoration: underline;
+        font-size: 1.5em;
+        text-align: center;
+        padding: 0.2em 0 0.2em 0;
+
+        font-weight: 700;
+
+    }
 }
