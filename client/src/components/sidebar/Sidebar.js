@@ -29,75 +29,44 @@ function Sidebar(){
     return (
         <div className='entire-sidebar'>
             <div className='sidebar-interactive'>
+                
                 <section className='icons'>
                     
-                    <div className="home-btn">
-                        <Link to='/' className='home-link' style={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            color: 'gray'
-                        }}>
+                    <div className="homeBtnDiv">
+                        <Link to='/' className='homeBtn'>
                             <FaHome className='icon'/>
                             <span>Home</span>
                         </Link> 
                     </div>
 
                     
-                    <div className="profile-btn">
+                    <div className="profileBtnDiv">
                         {user === null || user.username === null ? 
                             (
-                                <Link to='register' className='profile-link'
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        color: 'gray'
-                                    }}>
-                                    
+                                <Link to='register' className='profileBtn'>                                    
                                     <BsPerson className='icon'/><span>Profile</span>                            
-
                                 </Link>
                             )
                             : 
                             (
-                                <Link to={`/profile/${user.username}`} className='profile-link'
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        color: 'gray'
-                                    }}>
-                                    
+                                <Link to={`/profile/${user.username}`} className='profileBtn'>
                                     <BsPerson  className='icon'/><span>Profile</span>
-
                                 </Link>
                             )
                         }
                     </div>
 
-                    <div className='blackboard-btn'>
+                    <div className='blackboardBtnDiv'>
                         {user === null || user.username === null ?
                             (
-                                <Link to='register' className='profile-link'
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        color: 'gray'
-                                    }}>
-
+                                <Link to='register' className='blackboardBtn'>
                                     <GiBlackBook className='icon'/><span>Blackboard</span>
-
                                 </Link>
                             )
                             :
                             (
-                                <Link to='/blackboard' className='bb-link'
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        color: 'gray'
-                                    }}>
-
+                                <Link to='/blackboard' className='blackboardBtn'>
                                     <GiBlackBook className='icon'/><span>Blackboard</span>
-
                                 </Link>
                             )
                         }
