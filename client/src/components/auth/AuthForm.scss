@@ -3,10 +3,7 @@
 
 
 .auth-form{
-    position: absolute;
     
-    top: 0; // As you can guess this is how high it will be :: 0 is the top
-    bottom: 0; // Doesn't really show a difference
     // @include sm(){
     //     left: 15.5%;
     // }
@@ -16,24 +13,14 @@
     // @include lg(){
         
     // }
-    @include sm(){
-        left: 12%;
-    }
-
-    @include md(){
-        left: 15%;
-    }
-
-    @include lg(){
-        left: 17%;
-    }
+    
     
 
     // width: 100vw;
-    width: 80%;
+    width: 95%;
     
     // overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
-    margin-left: 1rem;
+    margin-left: 2.5rem;
     margin-top: 1rem;
     
     .form-regLog{

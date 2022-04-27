@@ -2,24 +2,17 @@
 @import '../../../style/mixins.scss';
 
 .class-form-css{
-    position: absolute;
-    top: 0; 
-    right: 0;
     
-    @include sm(){
-        left: 9%; 
-    }
-    @include md(){
-        left: 14%; 
-    }
+    // @include sm(){
+    //     left: 9%; 
+    // }
+    // @include md(){
+    //     left: 14%; 
+    // }
     @include lg(){
-        left: 17%; 
+        
     }
     
-    bottom: 0;
-    height: 100vh;
-
-    background-color: gainsboro;
     p{
         
         color: #353839;

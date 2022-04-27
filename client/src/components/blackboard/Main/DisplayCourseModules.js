@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import domain from "../../../util/domain";
 
 import './ClassDisplay.scss'
-import ClassRender from "./ClassRender";
+import ClassRender from "../StudentSelectedCourses/ClassRender";
 
 const Axios = require('axios')
 
@@ -39,6 +39,7 @@ function ClassDisplay({user}) {
                     <> 
                             {userDataWithClasses.length == 0 ?
                                 (
+                                    // > Go to courseCatalog if we haven't registered for a course yet
                                     <div className='noCourses'>
                                         <Link to='/classRegister' className='link-style-solo'>
                                             Register for some courses now!
@@ -47,18 +48,12 @@ function ClassDisplay({user}) {
                                 )
                                 :
                                 (
+                                    // > Go display course modules if we have some courses
                                     <>
                                         {userDataWithClasses.map((list, i) => {
                                             return <ClassRender key={i} classData={list}/>
                                         })  }
                                         
-                                        {/* <Link to='/classRegister' className='link-style' style={{
-                                            color: 'black',
-                                            marginLeft: '1.5em'
-                                        }}
-                                        >
-                                            Register for more courses!
-                                        </Link> */}
                                         <Link to='/classRegister' className='link-style'>
                                             Register for more courses!
                                         </Link>

@@ -6,44 +6,183 @@
     // Position the sidebar
     position: sticky;
     top: 0;
-    background-color: aqua;
     display: flex;
     flex-direction: row;
     width: 100%;
     
     
-    border-right:1px solid gray;
-    height: 12em;
+    border-bottom: 1px solid black;
+    background-color: white;
+    height: 8em;
 
     // ? breakpoints.scss
     @include sm(){
-        width: 9%;
-        height: 100vh;    
-        justify-content: space-between;
+        font-size: 0.3em;
+       // Home, Profile, and Tweet
+       .sidebar-interactive{
+        width: 80%;
+        .icons{
+            display: flex;
+            flex-direction: row;    
+            justify-content: space-between;
+            margin-top: 1.2em;
+
+            .homeBtn{
+                margin-left: 0.7rem;
+                font-size: 3vw;
+                color: black;
+                &:hover{
+                    text-decoration: none;
+                    border-radius: 5em;
+                    background-color: #1DCAFF;
+                    color: white;
+                }
+                
+                
+            }
+            .profileBtn{
+                color: black;
+                font-size: 3vw;
+                &:hover{
+                    text-decoration: none;
+                    border-radius: 5em;
+                    background-color: #1DCAFF;
+                    color: white;
+                }
+                
+            }
+            .blackboardBtn{
+                margin-right: 0.7rem;
+                color: black;
+                font-size: 3vw;
+                &:hover{
+                    text-decoration: none;
+                    border-radius: 5em;
+                    background-color: #1DCAFF;
+                    color: white;
+                }
+                
+            }
+        }
+    }
+
+    // Authlist(Sign up/Sign in) div section
+    .sidebar-authlist{
+        width: 20%;
+        font-size: 0.6em;
+        text-decoration: none;
+
+        .log-in-section{
+            .register-area{
+                
+                @include sidebar-btn();
+                
+            }
+
+            .login-area{
+                @include sidebar-btn();
+                margin-top: 0.5em;
+                margin-bottom: 1em;
+            }
+        }
+
+
+        .log-out-section{
+            height: 100%;
+            
+            .mini-user-info{
+                display: flex;
+                flex-direction: column;
+                
+                
+
+                .username-section{
+                    display: flex;
+                    justify-content: center;
+                    span{
+                        // Font changes with screen size now
+                        color: black;
+                        padding: 0.4em 0.4em 0.4em 0.4em;
+                        font-size: 1.9vw;
+                    }
+                }
+                .mini-logout{
+                    display: flex;
+                    justify-content: center;
+                    button{
+                        border-radius: 5px;
+                        border: 1px gray solid;
+                        padding: 0.5em;
+                        margin-top: 0.5em;
+                        background-color: #1d9bf0;
+                        color: white;
+                        width: 80%;
+                        &:hover{
+                            box-shadow: var(--box-shadow);
+                            background-color: red;
+                            color: black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+    @include md(){
+        font-size: 0.45em;
 
         // Home, Profile, and Tweet
         .sidebar-interactive{
-            height: 15%;
-            font-size: 1.9em;
-            span{
-                display: none;
-            }
+            width: 80%;
             .icons{
-                img{
-                    width: 100%;
-                }
-                .home-btn{
-                    margin-top: 0.4em;
+                display: flex;
+                flex-direction: row;    
+                justify-content: space-between;
+                margin-top: 2em;
+
+                .homeBtn{
+                    margin-left: 0.7rem;
+                    font-size: 3.3vw;
+                    color: black;
+                    &:hover{
+                        text-decoration: none;
+                        border-radius: 5em;
+                        background-color: #1DCAFF;
+                        color: white;
+                    }
+                    
                     
                 }
-                .profile-btn{
-                    margin-top: 1em;
+                .profileBtn{
+                    color: black;
+                    font-size: 3.3vw;
+                    &:hover{
+                        text-decoration: none;
+                        border-radius: 5em;
+                        background-color: #1DCAFF;
+                        color: white;
+                    }
+                    
+                }
+                .blackboardBtn{
+                    margin-right: 0.7rem;
+                    color: black;
+                    font-size: 3.3vw;
+                    &:hover{
+                        text-decoration: none;
+                        border-radius: 5em;
+                        background-color: #1DCAFF;
+                        color: white;
+                    }
+                    
                 }
             }
         }
 
         // Authlist(Sign up/Sign in) div section
         .sidebar-authlist{
+            width: 20%;
             font-size: 0.6em;
             text-decoration: none;
 
@@ -63,117 +202,27 @@
 
 
             .log-out-section{
-                .mini-pfp{
-                    img{
-                        width: 100%;
-                        border-radius: 20px;
-                        border: 1px gray solid;
-                    }
-                }
-
+                height: 100%;
+                
                 .mini-user-info{
-
-                    .username-section{
-                        width: 100%;
-                        margin-top: 0.4em;
-                        span{
-                            // Font changes with screen size now
-                            font-size: 1.9vw;
-                            color: gray;
-                        }
-                    }
-                    .mini-logout{
-                        button{
-                            border-radius: 5px;
-                            border: 1px gray solid;
-                            padding: 0.5em;
-                            margin-top: 0.5em;
-                            background-color: #1d9bf0;
-                            color: white;
-                            width: 100%;
-                            &:hover{
-                                box-shadow: var(--box-shadow);
-                                background-color: red;
-                                color: black;
-                            }
-                        }
-                    }
-                }
-                // Give it space to breath :)
-                padding: 0 0.2em 0 0.2em;
-
-                margin-bottom: 1em;
-            }
-        }
-    }
-
-
-    @include md(){
-        width: 14%;
-        height: 100vh;    
-        font-size: 0.6em;
-        justify-content: space-between;
-
-        // Home, Profile, and Tweet
-        .sidebar-interactive{
-            .icons{
-                .home-btn{
-                    font-size: 2.1vw;
-                    margin-top: 0.4em;
+                    display: flex;
+                    flex-direction: column;
                     
-                }
-                .profile-btn{
-                    font-size: 2.1vw;
-                    margin-top: 1em;
-                }
-                .blackboard-btn{
-                    font-size: 1.7vw;
-                    margin-top: 1em;
-                }
-            }
-        }
-
-        // Authlist(Sign up/Sign in) div section
-        .sidebar-authlist{
-            text-decoration: none;
-
-            .log-in-section{
-                .register-area{
                     
-                    @include sidebar-btn();
-                    
-                }
 
-                .login-area{
-                    @include sidebar-btn();
-                    margin-top: 0.5em;
-                    margin-bottom: 1em;
-                }
-            }
-
-
-            .log-out-section{
-                .mini-pfp{
-                    img{
-                        width: 100%;
-                        border-radius: 50px;
-                        border: 1px gray solid;
-                    }
-                }
-
-                .mini-user-info{
                     .username-section{
                         display: flex;
                         justify-content: center;
-                        width: 100%;
-                        margin-top: 0.4em;
                         span{
                             // Font changes with screen size now
-                            color: gray;
+                            color: black;
+                            padding: 0.4em 0.4em 0.4em 0.4em;
                             font-size: 1.9vw;
                         }
                     }
                     .mini-logout{
+                        display: flex;
+                        justify-content: center;
                         button{
                             border-radius: 5px;
                             border: 1px gray solid;
@@ -181,7 +230,7 @@
                             margin-top: 0.5em;
                             background-color: #1d9bf0;
                             color: white;
-                            width: 100%;
+                            width: 80%;
                             &:hover{
                                 box-shadow: var(--box-shadow);
                                 background-color: red;
@@ -190,50 +239,59 @@
                         }
                     }
                 }
-                // Give it space to breath :)
-                padding: 0 0.2em 0 0.2em;
-
-                margin-bottom: 1em;
             }
         }
     }
-
 
     @include lg(){
         font-size: 0.6em;
         
 
         // Home, Profile, Blackboard
-        .sidebar-interactive{
-            
-            
-            width: 100%;
-            
-            
-
+        .sidebar-interactive{            
+            width: 80%;
             .icons{
                 
                 display: flex;
                 flex-direction: row;    
                 justify-content: space-between;
-                margin-top: 0.5rem;
+                margin-top: 1.5em;
                 
+
                 .homeBtn{
-                    margin-left: 0.5rem;
-                    font-size: 2.3vw;
-                    color: white;
+                    margin-left: 0.7rem;
+                    font-size: 3.6vw;
+                    color: black;
+                    &:hover{
+                        text-decoration: none;
+                        border-radius: 5em;
+                        background-color: #1DCAFF;
+                        color: white;
+                    }
                     
                     
                 }
                 .profileBtn{
-                    color: red;
-                    font-size: 2.3vw;
+                    color: black;
+                    font-size: 3.6vw;
+                    &:hover{
+                        text-decoration: none;
+                        border-radius: 5em;
+                        background-color: #1DCAFF;
+                        color: white;
+                    }
                     
                 }
                 .blackboardBtn{
-                    margin-right: 0.5rem;
-                    color: pink;
-                    font-size: 1.9vw;
+                    margin-right: 0.7rem;
+                    color: black;
+                    font-size: 3.6vw;
+                    &:hover{
+                        text-decoration: none;
+                        border-radius: 5em;
+                        background-color: #1DCAFF;
+                        color: white;
+                    }
                     
                 }
             }
@@ -241,6 +299,7 @@
 
         // Authlist(Sign up/Sign in) div section
         .sidebar-authlist{
+            width: 20%;
             font-size: 0.6em;
             text-decoration: none;
 
@@ -260,29 +319,27 @@
 
 
             .log-out-section{
-                .mini-pfp{
-                    display: flex;
-                    justify-content: center;
-                    img{
-                        width: 10em;
-                        border-radius: 50px;
-                        border: 1px gray solid;
-                    }
-                }
-
+                height: 100%;
+                
                 .mini-user-info{
+                    display: flex;
+                    flex-direction: column;
+                    
+                    
+
                     .username-section{
                         display: flex;
                         justify-content: center;
-                        width: 100%;
-                        margin-top: 0.4em;
                         span{
                             // Font changes with screen size now
-                            color: gray;
+                            color: black;
+                            padding: 0.4em 0.4em 0.4em 0.4em;
                             font-size: 1.9vw;
                         }
                     }
                     .mini-logout{
+                        display: flex;
+                        justify-content: center;
                         button{
                             border-radius: 5px;
                             border: 1px gray solid;
@@ -290,7 +347,7 @@
                             margin-top: 0.5em;
                             background-color: #1d9bf0;
                             color: white;
-                            width: 100%;
+                            width: 80%;
                             &:hover{
                                 box-shadow: var(--box-shadow);
                                 background-color: red;
@@ -299,10 +356,6 @@
                         }
                     }
                 }
-                // Give it space to breath :)
-                padding: 0 0.2em 0 0.2em;
-
-                margin-bottom: 1em;
             }
         }
     }

@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import domain from '../../../util/domain'
+import domain from '../../../../util/domain'
 
 
 

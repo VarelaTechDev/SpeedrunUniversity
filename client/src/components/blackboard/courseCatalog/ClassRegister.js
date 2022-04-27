@@ -12,7 +12,7 @@ import ErrorMessage from '../../misc/ErrorMessage'
 
 import './ClassRegister.scss'
 
-import DisplayModule from "./DisplayModule";
+import DisplayModule from "./DisplayTaughtCourses";
 
 function ClassRegister() {
     // ! TEMP HOLDER TO REMOVE ERRORS

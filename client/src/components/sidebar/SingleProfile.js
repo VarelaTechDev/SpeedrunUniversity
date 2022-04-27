@@ -23,7 +23,9 @@ function SingleProfile({userData}) {
     // TODO: Need to add pronouns and profile banner when you register and edit register routes
     const [username, setUsername] = useState(userData.username)
     const [profilePicture, setProfilePicture] = useState(userData.profilePicture)
+    
     const [profileBanner, setProfileBanner] = useState(userData.profileBanner)
+
     const[pronouns, setPronouns] = useState(userData.pronouns)
     
     const [formUsername, setFormUsername]   = useState('')
@@ -110,7 +112,6 @@ function SingleProfile({userData}) {
                     <span className='name'>{userData.username}</span>
                 </div>
 
-{/* background-color:#fffafa; */}
                 <div className='profile-text-section'>
                     <h1>Basic Info</h1>
                     <span className='infoTitle'>Full Name:</span><span className='info'>{userData.name}</span><br></br>
@@ -174,7 +175,7 @@ function SingleProfile({userData}) {
                                 id='form-pronouns'
                                 type="text" 
                                 value={formPronouns}
-                                onChange={(e)=> setPronouns(e.target.value)}
+                                onChange={(e)=> setFormPronouns(e.target.value)}
                             />
                         </div>
 

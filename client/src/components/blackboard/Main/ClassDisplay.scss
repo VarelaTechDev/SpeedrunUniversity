@@ -2,32 +2,14 @@
 @import '../../../style/mixins.scss';
 
 .classDisplay{
-    // margin: 0.3em 1rem 1rem 0.3em;
-    
-    // padding: 0.1em 0 0.3em 0.1em;
-
-    // display: flex;
-    // flex-direction: column;
-    
-
-    // .classDisplayHeader{
-    //     margin-left: 0.4em;
-    //     font-size: 2em;
-    //     text-decoration: underline;
-        
-    // }
-    .link-style{
-        color: black;
-        margin-left: 2%;
-        font-size: 2em
-    }
-
     .noCourses{
-        //background-color: #C0DEED;
-        height: 100vh;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        height: 85vh;
+        
+        
+        
         
         .link-style-solo{
             border: 1px solid black;

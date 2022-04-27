@@ -1,22 +1,10 @@
-@import '../../../style/breakpoints.scss';
-@import '../../../style/mixins.scss';
+// > This is the component @ /courses/120
+@import '../../../../style/breakpoints.scss';
+@import '../../../../style/mixins.scss';
 
 .student-module{
-    position: absolute;
-    top: 0; 
-    right: 0;
-    @include sm(){
-        left: 9%; 
-    }
-    @include md(){
-        left: 14%; 
-    }
-    @include lg(){
-        left: 17%; 
-    }
+
     
-    bottom: 0;
-    height: 100vh;
     margin: 0 1rem 0 1rem;
     h3{
         font-size: 0.9rem;

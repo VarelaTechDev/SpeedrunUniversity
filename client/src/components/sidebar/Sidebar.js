@@ -97,29 +97,19 @@ function Sidebar(){
                     )
                     :
                     (
-                        <section className="log-out-section">
-                            
-                            <div className="mini-user-area">
-                                
-                                <div className="mini-pfp">
-                                    <img src={user.profilePicture} alt="" />
+                        <section className="log-out-section">    
+                            <div className="mini-user-info">
+                                <div className="username-section">
+                                    <span className='logout-username'>{user.username}</span>
                                 </div>
 
-                                <div className="mini-user-info">
-                                    <div className="username-section">
-                                        <span className='logout-username'>@{user.username}</span>
-                                    </div>
-
-                                    <div className="mini-logout">
-                                        <button className='btn-logout' onClick={logout}>
-                                            <p>Log out</p>
-                                        </button>    
-                                    </div>
-                                    
+                                <div className="mini-logout">
+                                    <button className='btn-logout' onClick={logout}>
+                                        <p>Log out</p>
+                                    </button>    
                                 </div>
                                 
-                            </div>   
-                            
+                            </div>
                         </section>
 
                     )

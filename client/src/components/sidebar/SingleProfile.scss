@@ -2,9 +2,10 @@
 
 .profile-section{
     background-color: #fffafa;
-    position: relative;
-    left: 17%;
-    width: 83%;
+    position: sticky;
+    top: 0;
+
+    
 
     .profile-background-area{
         .profile-background-img{
@@ -59,6 +60,7 @@
         border-top: none;
         border-right: none;
         border-left: none;
+        
         .profile-name{
             margin-left: 2em;
             .name{

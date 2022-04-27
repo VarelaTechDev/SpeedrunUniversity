@@ -10,10 +10,10 @@ import Login from './components/auth/Login'
 
 import Profile from "./components/sidebar/Profile";
 
-import Blackboard from './components/blackboard/Blackboard'
-import ClassRegister from "./components/blackboard/register/ClassRegister";
+import Blackboard from './components/blackboard/Main/Blackboard'
+import ClassRegister from "./components/blackboard/courseCatalog/ClassRegister";
 
-import StudentModule from './components/blackboard/courseModule/StudentModule';
+import StudentModule from './components/blackboard/StudentSelectedCourses/courseContent/StudentModule';
 
 // ? We can use <Link/> anywhere in the app to redirect to a URL and call the propert COMPONENT
 function RouterPage() {

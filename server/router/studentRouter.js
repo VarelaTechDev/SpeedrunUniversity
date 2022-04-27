@@ -276,7 +276,7 @@ router.put('/courses/:username/:courseId/:grade', async(req, res) => {
 
         const existingUser = await Student.findOne({username}).populate({
             path: 'courses',
-            select: ['ClassId', 'Material', 'Grade']
+            select: ['ClassId', 'Material', 'Grade','CompletedQuiz']
         })
 
         // Place the user courses here
@@ -287,9 +287,10 @@ router.put('/courses/:username/:courseId/:grade', async(req, res) => {
             x => x.ClassId == courseId
         )
         
+        // Change the grade and make quizCompleted true
         findCourse.Grade = grade
-        // ! For now, we will only have one quiz per class!
         findCourse.CompletedQuiz = true
+        
 
         await findCourse.save()
 
@@ -306,7 +307,7 @@ router.put('/courses/:username/:courseId/:grade', async(req, res) => {
 // ! PUT REQUEST TO CHANGE THEIR USERNAME [NOT USED ATM][LEGACY WARNING]
 // ^ PUT request :: A user wants to change their x
 router.put('/:username', auth, async(req, res) => {
-    const {originalUsername, newUsername} = req.body
+    const {originalUsername, newUsername, orginalPFP, newPFP, oldBanner, newBanner, oldPronouns, newPronouns} = req.body
     
     if(!originalUsername || !newUsername){
         return res.status(401).json({
@@ -324,16 +325,31 @@ router.put('/:username', auth, async(req, res) => {
         })
     }
 
-    
-    if(await Student.findOne({username: newUsername})){        
-        return res.status(401).json({
-            errorMessage: "Username already taken"
-        })
+
+
+    if(originalUsername != newUsername){
+        if(await Student.findOne({username: newUsername})){        
+            return res.status(401).json({
+                errorMessage: "Username already taken"
+            })
+        }
+        existingUsername.username = newUsername
     }
 
-    existingUsername.username = newUsername
-    const savedUsername = await existingUsername.save()
+    if(orginalPFP != newPFP){
+        existingUsername.profilePicture = newPFP
+    }
 
+    if(oldBanner != newBanner){
+        existingUsername.profileBanner = newBanner
+    }
+
+    if(oldPronouns != newPronouns){
+        existingUsername.pronouns = newPronouns
+    }
+
+
+    const savedUsername = await existingUsername.save()
     res.json(savedUsername)
 })
 
