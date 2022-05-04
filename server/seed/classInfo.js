@@ -1,12 +1,12 @@
 module.exports.id = [
-    '120',
-    '190',
+    '125',
+    '115',
     '101',
 ]
 
 module.exports.tags = [
-    'MAT',
     'CSC',
+    'MAT',
     'GE',
 ]
 

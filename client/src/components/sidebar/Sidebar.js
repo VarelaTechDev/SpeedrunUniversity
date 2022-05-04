@@ -14,6 +14,8 @@ import {BsPerson} from 'react-icons/bs'
 import {FaHome} from 'react-icons/fa'
 import {GiBlackBook} from 'react-icons/gi'
 
+import logo from '../../images/MySRU.png'
+
 
 function Sidebar(){
     const navigate = useNavigate()    
@@ -32,6 +34,11 @@ function Sidebar(){
                 
                 <section className='icons'>
                     
+                    <div className='logoDiv'>
+                        <img className="sruImg" src={logo} alt="" />
+                        
+                    </div>
+
                     <div className="homeBtnDiv">
                         <Link to='/' className='homeBtn'>
                             <FaHome className='icon'/>
