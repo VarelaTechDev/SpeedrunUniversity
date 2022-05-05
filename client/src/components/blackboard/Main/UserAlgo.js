@@ -7,6 +7,7 @@ export function convert(gradeNum){
 }
 
 export function doAlgo(user){
+    
     console.log(user)
     if(user.length >= 2){
         if(user[0].CompletedQuiz == true)
