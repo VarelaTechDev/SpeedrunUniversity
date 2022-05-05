@@ -11,6 +11,7 @@ import ErrorMessage from '../misc/ErrorMessage'
 import { useNavigate } from 'react-router-dom';
 import domain from '../../util/domain';
 import UserContext from '../../context/UserContext';
+import DisplayGrades from './DisplayGrades';
 
 const Axios = require('axios')
 
@@ -33,19 +34,30 @@ function SingleProfile({userData}) {
     const [formProfileBanner, setFormProfileBanner] = useState('')
     const [formPronouns, setFormPronouns] = useState('')
 
-
+    const[reportCardData, setReportCardData] = useState('')
 
     const [errorMessage, setErrorMessage] = useState(null)
 
     const navigate = useNavigate()
 
     useEffect(()=>{
+        
+        
         getUser()
         
         setFormUsername(username)
         setFormProfilePicture(profilePicture)
         setFormProfileBanner(profileBanner)
         setFormPronouns(pronouns)
+        const getReportCard = async() => {
+            const response = await Axios.get(`${domain}/auth/reportCard/${username}`)
+            console.log(response.data)
+            setReportCardData(response.data.courses)
+        }
+
+        getReportCard()
+        console.log(reportCardData)
+        
     }, [])
 
     async function sendEditForm(e){
@@ -107,6 +119,8 @@ function SingleProfile({userData}) {
             </div>
 
 
+            {/* https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ffiles.yande.re%2Fimage%2F327e37f67fd8d79c77a46b5bcc67db80%2Fyande.re%2520691872%2520animal_ears%2520cleavage%2520hololive%2520minato_aqua%2520nekomimi%2520pantyhose%2520seifuku%2520skirt_lift%2520tagme%2520tail%2520undressing.jpg&f=1&nofb=1 */}
+            {/* https://i.pinimg.com/originals/d3/e2/68/d3e268778a77cc1df25d03f004956da3.png */}
             <div className='profile-info-section'>
                 <div className="profile-name">
                     <span className='name'>{userData.username}</span>
@@ -121,7 +135,23 @@ function SingleProfile({userData}) {
                 
                 <div className='report-card'>
                     <h1>Report Card</h1>
-                    
+                    {reportCardData == '' ? 
+                        (console.log("Empty"))
+                        :
+                        (
+                            reportCardData.map((item, i) => {
+                                return <DisplayGrades key={i} grades={item}/>
+                            })
+                            // <div className="reportCard">
+                                // {console.log('Populated')}
+                                // {console.log(reportCardData)}
+                                
+
+                            
+
+                        )
+                
+                    }
                 </div>
 
             </div>

@@ -113,6 +113,27 @@
             height: auto;
             
             margin-bottom: 1em;
+            h1{
+                margin-bottom: 0.5em;
+            }
+            
+            .class{
+                width: 95%;
+                border: 1px solid black;
+                margin-bottom: 1em;
+                padding: 0.5em 0 0.5em 0.5em;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .leftMost{
+                    margin-left: 1em;
+                }
+                .rightMost{
+                    margin-right: 1em;
+                    font-size: 2em;
+                }
+            }
         }
 
         .follow-following-section{

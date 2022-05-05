@@ -215,6 +215,31 @@ router.put('/:username/:ClassId', async(req, res) => {
     return res.send(existingStudent)
 })
 
+// ^ Report Card ::
+// auth/reportCard/username
+router.get('/reportCard/:username', async(req, res) => {
+    try{
+        const {username} = req.params
+
+
+        if(!username){return res.status(401).json({errorMessage: 'No username detected'})}
+        
+        const existingUser = await Student.findOne({username})
+
+        if(!existingUser){return res.status(401).json({errorMessage: "User doesn't exist"})}
+        
+        return res.json(await Student.findOne({username})
+            .populate({
+                path:'courses',
+                select:['ClassId', 'Tag', 'Name', 'Grade','CompletedQuiz']
+            })
+        )
+    }catch(err){
+        return res.json(500).send()
+    }
+})
+
+
 // ^ GET request :: Get info about the person we send in the url
 router.get('/:username', async(req, res) => {
     try{
@@ -238,6 +263,8 @@ router.get('/:username', async(req, res) => {
         return res.json(500).send()
     }
 })
+
+
 
 // GO HERE WHEN WE CLICK ON A COURSE LINK
 router.get('/courses/:username/:courseId', async(req, res) => {

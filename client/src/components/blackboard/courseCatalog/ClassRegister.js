@@ -28,12 +28,34 @@ function ClassRegister() {
 
     const [klass, setKlasses] = useState([])
 
+    const [semesterOneClasses, setSemesterOneClasses] = useState([])
+    const [semesterTwoClasses, setSemesterTwoClasses] = useState([])
+    
     useEffect(() => {
         getClasses()
     }, [])
 
+    function getFirstChar(classId){
+        // console.log(classId.charAt(0))
+        console.log(classId.charAt(0) == '1')
+        return classId.charAt(0)
+    }
+
     async function getClasses(){
         const classResponse = await Axios.get(`${domain}/courses/list`)
+        
+        const data = classResponse.data
+        console.log(data)
+        
+        
+        const filterSemesterOne = data.filter((course) => getFirstChar(course.ClassId) == "1")
+        setSemesterOneClasses(filterSemesterOne)
+        
+        const filterSemesterTwo = data.filter((course) => getFirstChar(course.ClassId) == "2")
+        setSemesterTwoClasses(filterSemesterTwo)
+        
+        
+
         setKlasses(classResponse.data)
     }
 
@@ -45,12 +67,24 @@ function ClassRegister() {
             {klass.length == 0 || user == null? 
                 ('Loading')    
                 :
-                (
-                    klass.map((item, i) => {
-                        return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
-                    })
+                
+                    user.completedSemesterOne ? 
+                        (
+                        semesterTwoClasses.map((item, i) => {
+                            return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
+                        })
+                        )
+                        :
+                        (
+                        semesterOneClasses.map((item, i) => {
+                            return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
+                        })
+                        )
                     
-                )
+                    
+                    
+                    
+                
             }
         </div>
     )
