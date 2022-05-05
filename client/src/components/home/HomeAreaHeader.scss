@@ -25,6 +25,7 @@
 }
 
 .header{
+    position: static;
     img{
         background-size: cover;
         width: 100%;
@@ -34,11 +35,20 @@
         margin-top: -0.3em;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
         
         height: 15rem;
         
-
+        background-color: pink;
+        background-image: url('../../images/flexCollege.png');
+        background-size: 100% 100%;
         .box{
+            &:first-child{
+                margin-left: 1em;
+            }
+            &:last-child{
+                margin-right: 1em;
+            }
             &:nth-child(2n){
                 background-color: #EA7166;
             }
@@ -46,13 +56,16 @@
             &:nth-child(2n-1){
                 background-color: #2787EA;
             }
-            
+            margin: 0.5em 0 0.5em 0;
             border: 2px solid black;
-            width: 25%;
+            width: 20%;
+            border-radius: 50px;
             
             display: flex;
             flex-direction: column;
             align-items: center;
+            
+            
             .innerBoxTop{
                 margin-top: 1em;
                 height: 40%;
@@ -62,11 +75,13 @@
                 }
             }
             .innerBoxBot{
+                
                 height: 60%;
                 margin-top: 2em;
+                text-align: center;
                 span{
                     
-                    font-size: 180%;
+                    font-size: 160%;
                     color: #FFF;
                     font-weight: bold;
                     -webkit-text-stroke: 1px #000;
@@ -80,6 +95,7 @@
     }
 
     .announce{
+        
         border: 3px solid black;
         border-top: 0;
         width: 100%;

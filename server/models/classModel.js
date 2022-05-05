@@ -8,20 +8,23 @@ const classSchema = new mongoose.Schema(
         Name: {type: String, },
         Professor: {type: String, },
         CompletedQuiz: {type: Boolean, },
-        Synopsis: {type: String, },
         Material: {
             chapterOne: {
                 completedQuiz: {type: Boolean},
+                
                 reading: {type: String, },
                 
                 questionOne: {type: String, },
                 answerOne: {type: String, },
-                
+                wrongOneAnswer: {type: String, },
+
                 questionTwo: {type: String, },
                 answerTwo: {type: String, },
-                
+                wrongTwoAnswer: {type: String, },
+
                 questionThree: {type: String, },
                 answerThree: {type: String, },
+                wrongThreeAnswer: {type: String, },
             }
         },
         Grade: {type: Number, },

@@ -1,53 +1,80 @@
 module.exports.id = [
-    '125',
+    '130',
     '115',
     '101',
+    '101',
+    '250',
+    '235',
+    '225',
+    '205',
+    '205',
 ]
 
 module.exports.tags = [
     'CSC',
     'MAT',
-    'GE',
+    'ART',
+    'ANTH',
+    'RRS',
+    'AA',
 ]
 
 module.exports.name = [
-    'Learning Java with Projects',
+    'Into to Java',
     'Calculus I',
-    'Art I'
+    'Intro To Art',
+    'Digging Into The Past',
+    'Advance Java',
+    'Machine Learning',
+    'Calculus II',
+    'Race, Labor, and Class',
+    'Asian Americans In Education',
 ]
 
 module.exports.professor = [
     'Oak',
     'Rowan',
-    'Prime'
+    'Byleth',
+    'Paarthurnax',
+    'Raiden',
+    'Rost',
 ]
 
+// Selling the course to you
 module.exports.intro = [
-    'Java is a programming language and computing platform first released by Sun Microsystems in 1995. It has evolved from humble beginnings to power a large share of today’s digital world, by providing the reliable platform upon which many services and applications are built. New, innovative products and digital services designed for the future continue to rely on Java, as well.',
-    'Calculus is a branch of mathematics that involves the study of rates of change. Before calculus was invented, all math was static: It could only help calculate objects that were perfectly still. But the universe is constantly moving and changing.',
+    'Learn Java', // Intro to Java
+    'Learn what math can really do', // Calculus I
+    'Learn the basic of simple art techniques', // Intro to Art
+    'Look into the past throughout history', // Diggining
+    'Learn what you can truely do with Java', // Advance Java
+    'Become the professor and teach computers!', // Machine Learning
+    'The next level of Calculus', // Calculus II
+    'Learn about the socio-economic disadvantage', // Race, Labor, and Class
+    'History of Asian Americans in the United States', // Asian Americans in Education
 ]
 
-module.exports.synopsis = [
-    'Java is a popular programming language, created in 1995. It is owned by Oracle, and more than 3 billion devices run Java.',
-    'Calculus is concerned with comparing quantities which vary in a non-linear way. It is used extensively in science and engineering since many of the things we are studying (like velocity, acceleration, current in a circuit) do not behave in a simple, linear fashion. If quantities are continually changing, we need calculus to study what is going on.',
-    'Introduction to Art: Design, Context, and Meaning offers a comprehensive introduction to the world of Art',
-]
 
 module.exports.material = [
     
-    // Java
+    // Intro to Java [0]
     "Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere (WORA),[17] meaning that compiled Java code can run on all platforms that support Java without the need to recompile.[18] Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying computer architecture. The syntax of Java is similar to C and C++, but has fewer low-level facilities than either of them. The Java runtime provides dynamic capabilities (such as reflection and runtime code modification) that are typically not available in traditional compiled languages. As of 2019, Java was one of the most popular programming languages in use according to GitHub,[19][20] particularly for client–server web applications, with a reported 9 million developers.[21] ",
     [ // 1
         'What are the four pillers of Object-Oriented Programming?',
         'Encapsulation, Abstraction, Inheritance, and Polymorphism',
+        'Peace and Security, Human Rights, Rule of Law, and Development'
+
     ],
+
     [ // 2
         "What method does every Java project have?",
-        'A main method'
+        'A main method',
+        "Java doesn't require a method to run, since Java is not verbose "
     ],
+
     [ // 3
-        "Placeholder question 3[Java]",
-        'Placeholder answer 3[Java]'
+        "How many devices run in Java according to Oracle?",
+        '3 billion devices',
+        '3 morbillion devices',
     ],
 
     // Calculus I
@@ -67,31 +94,144 @@ module.exports.material = [
     "calculus and integral calculus, the term is also used for naming specific methods of calculation and related theories, such as propositional calculus, Ricci calculus, calculus " +
     "of variations, lambda calculus, and process calculus.",
     [ // 5
-        'What is the dirivative of 2x^2?',
+        'What is the derivative of 2x^2?',
         '4x',
+        '(2/3)x^4',
     ],
     [ // 6
-        "Placeholder question 2[Calc]",
-        'Placeholder answer 2[Calc]'
+        "What's the first letter in 'Calculus'?",
+        'C',
+        '<'
     ],
     [   // 7
-        "Placeholder question 3[Calc]",
-        'Placeholder answer 3[Calc]'
+        "Pick the 'first answer'",
+        'first answer',
+        'first answ3r <-- FIRST ANSWER!!!!'
     ],
 
-    // Art 101
+    // Intro to Art
     "Art is a diverse range of human activity, and resulting product, that involves creative or imaginative talent expressive of technical proficiency, bea",
     [ // 9
         "What is the first letter in the word 'Art'?",
         'A',
     ],
     [ // 10
-        'Placeholder question 2 [Art]',
-        'Placeholder answer 2 [Art]'
+        'How many letters is in the word "art"',
+        '3',
+        '2',
     ],
     [ // 11
-        'Placeholder question 3 [Art]',
-        'Placeholder answer 3 [Art]'
+        "Does Art begin with 'z'?",
+        'No',
+        'Yes',
+    ],
+
+    // Digging Into The Past
+    "Digging up the past is muddy work ",
+    [ // 9
+        "What's muddy work according to the reading?",
+        'Digging',
+        'Washing dishes'
+    ],
+    [ // 10
+        'Pick the first answer to get credit',
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+    [ // 11
+        "Pick the first answer to get credit",
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+
+    // Advance Java
+    "Using the Spring framework, you can build your own backend with Java. A lightweight framework",
+    [ // 9
+        "What framework will we be learning in this course?",
+        'Spring',
+        'Express'
+    ],
+    [ // 10
+        'Pick the first answer to get credit',
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+    [ // 11
+        "Pick the first answer to get credit",
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+
+    // Machine Learning
+    "Digging up the past is muddy work ",
+    [ // 9
+        "What's muddy work according to the reading?",
+        'Digging',
+        'Washing dishes'
+    ],
+    [ // 10
+        'Pick the first answer to get credit',
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+    [ // 11
+        "Pick the first answer to get credit",
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+
+    // Calculus II
+    "Now we learn about integrals... ",
+    [ // 9
+        "What is the integral of (x^2)dx",
+        '(x^3/3) + C',
+        '2x'
+    ],
+    [ // 10
+        'Pick the first answer to get credit',
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+    [ // 11
+        "Pick the first answer to get credit",
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+
+    // Race, Labor, and Class
+    "Socio-econmic disadvantage bad --> quiz now",
+    [ // 9
+        "What are the typical three levels of socioeconomic status?",
+        'high, middle, and low',
+        'rich, decent, and poor'
+    ],
+    [ // 10
+        'Pick the first answer to get credit',
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+    [ // 11
+        "Pick the first answer to get credit",
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+
+    // Asian Americans in Education
+    "Asians....",
+    [ // 9
+        "Are Indians Asian?",
+        'Yes',
+        'No'
+    ],
+    [ // 10
+        'Pick the first answer to get credit',
+        'Correct Answer',
+        'Wrong Answer',
+    ],
+    [ // 11
+        "Pick the first answer to get credit",
+        'Correct Answer',
+        'Wrong Answer',
     ],
 
 ]

@@ -15,9 +15,10 @@ function Header() {
         
 
         <div className='display'>
+          
           <div className="box">
             <div className="innerBoxTop">
-              <img src={cert} alt="" />
+              <img src={cert} alt="" className='displayImg'/>
             </div>
 
             <div className="innerBoxBot">

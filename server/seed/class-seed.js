@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const {id, name, professor, material, intro, tags, synopsis} = require('./classInfo')
+const {id, tags, name, professor, intro, material} = require('./classInfo')
 
 const Class = require('../models/classModel')
 
@@ -10,94 +10,79 @@ mongoose.connect(`mongodb://localhost:27017/sru`,
         console.log('Connected to MongoDB by seeder!')
 })
 
+
 // ? Calling this method will seed our database with info from 'classInfo.js'
 const seedDB = async() => {
     // * Empty the database when we run the method
     await Class.deleteMany({})
-        
-    // Learning Java with Projects
-    const programmingClass = new Class({
-        ClassId: id[0],
-        Tag: tags[0],
-        Name: name[0],
-        Professor: professor[0],
-        CompletedQuiz: false,
-        Synopsis: synopsis[0],
-        ClassIntro: intro[0],
-        Material: {
-            chapterOne: {
-                reading: material[0],
-                
-                questionOne: material[1][0],
-                answerOne: material[1][1],
 
-                questionTwo: material[2][0],
-                answerTwo: material[2][1],
+    const tagArray = [0,1,2,3,0,0,1,4,5]
+    let materialCounter = 0;
 
-                questionThree: material[3][0],
-                answerThree: material[3][1],
-            }
-        },
-        Grade: 0,
-    })
+    for(let i = 0; i < id.length; i++){
+
+
+        const dynamicCourse = new Class({
+            ClassId: id[i],
+            Tag: tags[tagArray[i]],
+            // Tag: tags[0],
+            Name: name[i],
+            Professor: professor[Math.floor(Math.random()*professor.length)],
+            CompletedQuiz: false,
+            ClassIntro: intro[i],
+            Material:{
+                chapterOne: {
+                    reading: material[materialCounter++],
+                    
+                    questionOne: material[materialCounter][0],
+                    answerOne: material[materialCounter][1],
+                    wrongOneAnswer: material[materialCounter++][2],
+
+                    questionTwo: material[materialCounter][0],
+                    answerTwo: material[materialCounter][1],
+                    wrongTwoAnswer: material[materialCounter++][2],
+
+                    questionThree: material[materialCounter][0],
+                    answerThree: material[materialCounter][1],
+                    wrongThreeAnswer: material[materialCounter++][2],
+                }
+            },
+            Grade: 0,
+        })
+        await dynamicCourse.save()
+    }
     
-    // Calculus I
-    const mathClass = new Class({
-        ClassId: id[1],
-        Tag: tags[1],
-        Name: name[1],
-        Professor: professor[1],
-        CompletedQuiz: false,
-        Synopsis: synopsis[1],
-        ClassIntro: intro[1],
-        Material: {
-            chapterOne: {
-                completedQuiz: false,
-                reading: material[4],
+    // const introToJava = new Class({
+    //     ClassId: id[0],
+    //     Tag: tags[0],
+    //     Name: name[0],
+    //     Professor: professor[Math.floor(Math.random()*professor.length)],
+    //     CompletedQuiz: false,
+    //     ClassIntro: intro[0],
+    //     Material: {
+    //         chapterOne: {
+    //             reading: material[0],
+                
+    //             questionOne: material[1][0],
+    //             answerOne: material[1][1],
+    //             wrongOneAnswer: material[1][2],
 
-                questionOne: material[5][0],
-                answerOne: material[5][1],
+    //             questionTwo: material[2][0],
+    //             answerTwo: material[2][1],
+    //             wrongTwoAnswer: material[2][2],
 
-                questionTwo: material[6][0],
-                answerTwo: material[6][1],
-
-                questionThree: material[7][0],
-                answerThree: material[7][1],
-            }
-        },
-        Grade: 0,
-    })
-
-    // Art 101
-    const artClass = new Class({
-        ClassId: id[2],
-        Tag: tags[2],
-        Name: name[2],
-        Professor: professor[2],
-        CompletedQuiz: false,
-        Synopsis: synopsis[2],
-        ClassIntro: intro[2],
-        Material: {
-            chapterOne: {
-                completedQuiz: false,
-                reading: material[8],
-
-                questionOne: material[9][0],
-                answerOne: material[9][1],
-
-                questionTwo: material[10][0],
-                answerTwo: material[10][1],
-
-                questionThree: material[11][0],
-                answerThree: material[11][1],
-            }
-        },
-        Grade: 0,
-    })
-
-    await programmingClass.save()
-    await mathClass.save()
-    await artClass.save()
+    //             questionThree: material[3][0],
+    //             answerThree: material[3][1],
+    //             wrongThreeAnswer: material[3][2],
+    //         }
+    //     },
+    //     Grade: 0,
+    // })
+    
+    
+    
+    // await introToJava.save()
+    
 
 }
 
