@@ -73,8 +73,106 @@ function ClassRegister() {
         setKlasses(classResponse.data)
     }
 
-    async function recAlgoTheCourses(){
-        return false
+    function getFirstNum(classId){
+        return parseInt(classId.charAt(0))
+    }
+
+    function algoSemesterTwo(){
+        // Array(5) [ {…}, {…}, {…}, {…}, {…} ]
+        // 0: Object { _id: "627425da21e0cc04d51714a6", ClassId: "250", Tag: "CSC", … }
+        // 1: Object { _id: "627425da21e0cc04d51714a8", ClassId: "235", Tag: "CSC", … }
+        // 2: Object { _id: "627425da21e0cc04d51714aa", ClassId: "225", Tag: "MAT", … }
+        // 3: Object { _id: "627425da21e0cc04d51714ac", ClassId: "205", Tag: "RRS", … }
+        // 4: Object { _id: "627425da21e0cc04d51714ae", ClassId: "205", Tag: "AA", … }
+        console.log(semesterTwoClasses)
+
+        // Array [ {…}, {…} ]
+        // 0: Object { _id: "627425e4c16026218402d220", ClassId: "130", Tag: "CSC", … }​
+        // 1: Object { _id: "627425e8c16026218402d232", ClassId: "115", Tag: "MAT", … }
+
+        let cscArray = semesterTwoClasses.filter((course) => getFirstChar(course.Tag) == 'C')
+        let matArray = semesterTwoClasses.filter((course) => getFirstChar(course.Tag) == 'M')
+        let geArray = semesterTwoClasses.filter((course) => getFirstChar(course.Tag) != 'C' && getFirstChar(course.Tag) != 'M')
+        
+        let CSC_Counter = 0
+        let MAT_Counter = 0
+        let GE_Counter = 0
+
+
+        // We will append
+        let sortedArray = []
+        for(let i = 0; i < reportCardData.courses.length; i++){
+            if(reportCardData.courses[i].Tag == 'CSC'){
+                CSC_Counter = CSC_Counter + (parseInt(reportCardData.courses[i].ClassId) * reportCardData.courses[i].Grade * .10)
+                if(reportCardData.courses[i].Grade <= 60)
+                    CSC_Counter -= 1000
+            }
+            else if(reportCardData.courses[i].Tag == 'MAT'){
+                MAT_Counter = MAT_Counter + (parseInt(reportCardData.courses[i].ClassId) * reportCardData.courses[i].Grade * .10)
+                if(reportCardData.courses[i].Grade <= 60)
+                    MAT_Counter -= 1000
+            }
+
+            else{
+                GE_Counter = GE_Counter + (parseInt(reportCardData.courses[i].ClassId) * reportCardData.courses[i].Grade * .10)
+                if(reportCardData.courses[i].Grade <= 60)
+                    GE_Counter -= 1000
+            }
+        }
+
+        console.log(CSC_Counter)
+        console.log(MAT_Counter)
+        console.log(GE_Counter)
+
+        // If CSC is the highest
+        if(CSC_Counter >= MAT_Counter && CSC_Counter >= GE_Counter){
+            sortedArray.push(...cscArray)
+            if(MAT_Counter >= GE_Counter){
+                sortedArray.push(...matArray)
+                sortedArray.push(...geArray)
+            }
+            else{
+                sortedArray.push(...geArray)
+                sortedArray.push(...matArray)
+            }
+        }
+
+        if(MAT_Counter > CSC_Counter && MAT_Counter > GE_Counter){
+            sortedArray.push(...matArray)
+            console.log("JOE")
+            if(CSC_Counter > GE_Counter){
+                sortedArray.push(...cscArray)
+                sortedArray.push(...geArray)
+            }
+            else{
+                sortedArray.push(...geArray)
+                sortedArray.push(...cscArray)
+            }
+        }
+
+        console.log(geArray)
+        if(GE_Counter > (CSC_Counter && GE_Counter > MAT_Counter)){
+            console.log("HELLO")
+            sortedArray.push(...geArray)
+            if(CSC_Counter > MAT_Counter){
+                sortedArray.push(...cscArray)
+                sortedArray.push(...matArray)
+            }
+            else{
+                sortedArray.push(...matArray)
+                sortedArray.push(...cscArray)
+            }
+        }
+
+        console.log(sortedArray)
+        // setSemesterTwoClasses(sortedArray)
+        console.log(semesterTwoClasses)
+        return sortedArray
+        //console.log(sortedArray)
+        // setSemesterTwoClasses(sortedArray)
+        //console.log('SEMESTER TWO')
+
+        //console.log(semesterTwoClasses)
     }
 
     return  (
@@ -87,9 +185,14 @@ function ClassRegister() {
                 :
                     doAlgo(reportCardData.courses) ? 
                         (
-                        semesterTwoClasses.map((item, i) => {
-                            return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
-                        })
+                            
+                            algoSemesterTwo().map((item, i) => {
+                                return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
+                            })
+                            // algoSemesterTwo(),
+                            // semesterTwoClasses.map((item, i) => {
+                            //     return <DisplayModule key={i} Synopsis={item.Synopsis} ClassId={item.ClassId} Name={item.Name} Tag={item.Tag}Professor={item.Professor} UserData={user}/>
+                            // })
                         )
                         :
                         (
