@@ -8,7 +8,7 @@ import './EditFormSingleProfile.scss'
 
 import ErrorMessage from '../misc/ErrorMessage'
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import domain from '../../util/domain';
 import UserContext from '../../context/UserContext';
 import DisplayGrades from './DisplayGrades';
@@ -60,6 +60,10 @@ function SingleProfile({userData}) {
         console.log(reportCardData)
         
     }, [])
+
+    function goToGrad(){
+        navigate(`/grad/${user.name}`)
+    }
 
     async function sendEditForm(e){
         e.preventDefault()
@@ -153,6 +157,17 @@ function SingleProfile({userData}) {
                         )
                 
                     }
+                </div>
+
+                <div className='gradDiv'>
+                    {reportCardData.length >= 4 ?
+                        // <Link to ={`/grad/${user.name}`}>Grad</Link>
+                        <button onClick={goToGrad}>Graduate</button>
+                        
+                        :
+                        <></>
+                    }
+                    
                 </div>
 
             </div>

@@ -34,6 +34,8 @@ const seedDB = async() => {
         await student.save()
     }
 
+    // Keqing PFP
+    //https://i.pinimg.com/474x/a7/18/0d/a7180d77de9d44f0b3d66fe752e55b24.jpg
     // Create the Aqua PFP
     const salt = await bycrypt.genSaltSync(10)
     const passwordHash = await bycrypt.hashSync(aquaInfo[6], salt)
@@ -44,7 +46,8 @@ const seedDB = async() => {
             username: aquaInfo[2],
             pronouns: aquaInfo[3],
             profilePicture: aquaInfo[4],
-            profileBanner: aquaInfo[5],
+            // profileBanner: aquaInfo[5],
+            profileBanner: profileBanner[0],
             passwordHash: passwordHash,
         })
 

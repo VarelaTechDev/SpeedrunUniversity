@@ -135,6 +135,32 @@
                 }
             }
         }
+        .gradDiv{
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            button{
+                background-color: #1DCAFF;
+                height: 4em;
+                border-radius: 15px;
+                padding: 1em;
+                margin-bottom: 1em;
+                color: white;
+                
+                &:hover{
+                    text-decoration: none;
+                    color: black;
+                    border: 1px solid black;
+                    background-color: #E23500;   
+                    
+                }
+                
+            }
+            
+
+
+        }
 
         .follow-following-section{
             margin: 1em 0 1em 0;
