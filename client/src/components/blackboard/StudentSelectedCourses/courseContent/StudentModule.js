@@ -115,7 +115,7 @@ function StudentModule() {
                                     <br/>
                                     
                                     <input type="radio" value="WRONG" id="qThreeTwo" name="gThree" onClick={(e) => setQuestionThreeAnswer(e.target.value)}/>            
-                                    <label htmlFor="qThreeTwo">{classData.chapterOne.wrongTwoAnswer}</label>
+                                    <label htmlFor="qThreeTwo">{classData.chapterOne.wrongThreeAnswer}</label>
                                 </div>
                                 <button className='btn-submit' type='submit'>Submit</button>
                             </form>

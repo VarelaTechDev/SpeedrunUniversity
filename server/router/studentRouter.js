@@ -195,6 +195,7 @@ router.put('/:username/:ClassId', async(req, res) => {
         Name: getClass.Name,
         Professor: getClass.Professor,
         CompletedQuiz: getClass.CompletedQuiz,
+        OwnedByStudent: true,
         ClassIntro: getClass.ClassIntro,
         Material: getClass.Material,
         Grade: getClass.Grade,

@@ -8,6 +8,7 @@ const classSchema = new mongoose.Schema(
         Name: {type: String, },
         Professor: {type: String, },
         CompletedQuiz: {type: Boolean, },
+        OwnedByStudent: {type: Boolean, },
         Material: {
             chapterOne: {
                 completedQuiz: {type: Boolean},

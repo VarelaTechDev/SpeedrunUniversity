@@ -5,7 +5,7 @@ const Classes = require('../models/classModel')
 // ^ GET REQUEST: List all of the classes from the class database
 router.get('/list', async(req, res) => {
     try{
-        const courses = await Classes.find()
+        const courses = await Classes.find({OwnedByStudent:false})
         
         return res.send(courses)
 

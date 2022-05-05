@@ -29,6 +29,7 @@ const seedDB = async() => {
             Name: name[i],
             Professor: professor[Math.floor(Math.random()*professor.length)],
             CompletedQuiz: false,
+            OwnedByStudent: false,
             ClassIntro: intro[i],
             Material:{
                 chapterOne: {
