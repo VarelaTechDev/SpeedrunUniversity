@@ -49,6 +49,7 @@ function SingleProfile({userData}) {
         setFormProfilePicture(profilePicture)
         setFormProfileBanner(profileBanner)
         setFormPronouns(pronouns)
+        
         const getReportCard = async() => {
             const response = await Axios.get(`${domain}/auth/reportCard/${username}`)
             console.log(response.data)
