@@ -6,17 +6,65 @@
 
     
     margin: 0 1rem 0 1rem;
+    // ClassReading
     h3{
         font-size: 0.9rem;
+        padding: 1em;
+        line-height: 30px;
+        text-indent: 50px;
     }
+    //  Quiz 
     h4{
+        
+        
+        
         margin-top: .5em;
-        font-weight: 200;
+        font-weight: bold;
+        
+        font-size: 2em;
         text-decoration: underline;
+        padding-left: 0.3em;
+    }
+
+    .form-quiz{
+        padding-left: 0.4em;
+        .questionOne{
+            p{
+                font-size: 1.3em;
+                margin-bottom: 0.4em;
+            }
+            input{
+                margin-left: 0.4em;
+                margin-bottom: 0.5em;
+            }
+        }
+        .questionTwo{
+            margin-top: 2em;
+            p{
+                font-size: 1.3em;
+                margin-bottom: 0.4em;
+            }
+            input{
+                margin-left: 0.4em;
+                margin-bottom: 0.5em;
+            }
+        }
+        .questionThree{
+            margin-top: 2em;
+            p{
+                font-size: 1.3em;
+                margin-bottom: 0.4em;
+            }
+            input{
+                margin-left: 0.4em;
+                margin-bottom: 0.5em;
+            }
+        }
     }
     button{
         @include btn();   
         background-color: aqua;
         margin: 1em 0 2em 0;
     }
+    
 }

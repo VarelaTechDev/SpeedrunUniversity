@@ -28,6 +28,24 @@
                 color: #331800;
                 background-color: #FF4705;
             }
+            
+        }
+        
+    }
+
+    .link-style{
+        
+        margin-left: 2em;
+        color: black;
+        border: 1px solid black;
+        padding: 0.5em;
+        border-radius: 20px;
+        text-decoration: none;
+        background-color: #1DCAFF;
+        color: white;
+        &:hover{
+            background-color: #E23500;
+            color: black;
         }
     }
 }
