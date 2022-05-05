@@ -183,10 +183,32 @@ router.put('/:username/:ClassId', async(req, res) => {
     if(!existingStudent) return res.status(401).json({errorMessage: "Student doesn't exist"})
 
     let getClass = await Classes.findOne({ClassId})
+
+    console.log(getClass)
+
     if(!getClass) return res.status(401).json({errorMessage: "Class doesn't exist"})
 
+
+    let copyOfClass = new Classes({
+        ClassId: getClass.ClassId,
+        Tag: getClass.Tag,
+        Name: getClass.Name,
+        Professor: getClass.Professor,
+        CompletedQuiz: getClass.CompletedQuiz,
+        ClassIntro: getClass.ClassIntro,
+        Material: getClass.Material,
+        Grade: getClass.Grade,
+    })
+
+    await copyOfClass.save()
+    console.log(copyOfClass)
+
+
+    // ! MADE A COPY AND NOW THIS
+
     // * Add the course we found to the user course[ObjectID]
-    existingStudent.courses.push(getClass)  
+    existingStudent.courses.push(copyOfClass)  
+  
     
     await existingStudent.save()
     
@@ -205,10 +227,10 @@ router.get('/:username', async(req, res) => {
         if(!existingUser){return res.status(401).json({errorMessage: "User doesn't exist"})}
         
         // * Populate the data
-        return res.json(await Student.find({username})
+        console.log(existingUser)
+        return res.json(await Student.findOne({username})
             .populate({
                 path: 'courses',
-                //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
                 select:['ClassId', 'Name', 'Professor', 'Material', 'Tag', 'Synopsis']
             })
         )
@@ -226,6 +248,7 @@ router.get('/courses/:username/:courseId', async(req, res) => {
 
     // We want to get just the course ID
     const courseData = await Classes.findOne({courseId})
+    
     // return res.json(courseData._id)
 
     const existingUser = await Student.findOne({username}).populate({
@@ -252,12 +275,15 @@ router.get('/courses/:username', async(req, res) => {
         
         if(!existingUser){return res.status(401).json({errorMessage: "User doesn't exist"})}
         
+
+
         // * Populate the data
         return res.json(await Student.find({username})
             .populate({
                 path: 'courses',
                 //select:['ClassId', 'Name', 'Professor', 'Material.chapterOne.reading']
                 select:['ClassId', 'Name', 'Professor', 'Material', 'Grade', 'Tag', 'CompletedQuiz', 'Synopsis']
+                // select:['ClassId', 'Grade']
             })
         )
     }catch(err){
@@ -288,13 +314,13 @@ router.put('/courses/:username/:courseId/:grade', async(req, res) => {
         )
         
         // Change the grade and make quizCompleted true
-        findCourse.Grade = grade
+        findCourse.Grade = parseInt(grade)
         findCourse.CompletedQuiz = true
         
 
         await findCourse.save()
 
-        return res.json(findCourse)
+        return res.json(existingUser)
 
     }catch(err){
         return res.json(500).send()
